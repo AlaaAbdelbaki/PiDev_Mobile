@@ -1,6 +1,7 @@
 package com.kingpins.tunisiagottalent;
 
 
+import com.kingpins.tunisiagottalent.GUI.LoginForm;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
@@ -29,9 +30,8 @@ public class TunisiaGotTalent {
 
         theme = UIManager.initFirstTheme("/theme");
 
-        // Enable Toolbar on all Forms by default
-        Toolbar.setGlobalToolbar(true);
-
+         Toolbar.setGlobalToolbar(true);
+        Toolbar.setCenteredDefault(false);
         // Pro only feature
         Log.bindCrashProtection(true);
 
@@ -46,21 +46,20 @@ public class TunisiaGotTalent {
         });        
     }
     
+   
     public void start() {
         if(current != null){
             current.show();
             return;
         }
-        Form hi = new Form("Hi World", BoxLayout.y());
-        hi.add(new Label("Hi World"));
-        hi.show();
+        new LoginForm(theme).show();
     }
 
     public void stop() {
-        current = getCurrentForm();
+        current = Display.getInstance().getCurrent();
         if(current instanceof Dialog) {
             ((Dialog)current).dispose();
-            current = getCurrentForm();
+            current = Display.getInstance().getCurrent();
         }
     }
     

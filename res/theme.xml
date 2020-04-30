@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="fs2.jpg"  />
+    <image name="logo.png"  />
+    <image name="mp4.jpg"  />
+    <image name="text-field-underline.png"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <val key="CreateNewAccountButton.align" value="4" />
+        <val key="CreateNewAccountButton.bgColor" value="ff00" />
+        <val key="CreateNewAccountButton.fgColor" value="ffffff" />
+        <font key="CreateNewAccountButton.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
+        <val key="CreateNewAccountButton.margin" value="4.0,0.0,0.0,0.0" />
+        <val key="CreateNewAccountButton.transparency" value="0" />
+        <val key="LoginButton.align" value="4" />
+        <val key="LoginButton.bgColor" value="990099" />
+        <val key="LoginButton.fgColor" value="ffffff" />
+        <font key="LoginButton.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.5" />
+        <val key="LoginButton.marUnit" value="2,2,2,2" />
+        <val key="LoginButton.margin" value="3.0,3.0,1.0,1.0" />
+        <val key="LoginButton.padUnit" value="2,2,2,2" />
+        <val key="LoginButton.padding" value="2.0,2.0,2.0,2.0" />
+        <val key="LoginButton.press#align" value="4" />
+        <val key="LoginButton.press#bgColor" value="cc66ff" />
+        <val key="LoginButton.press#fgColor" value="cccccc" />
+        <font key="LoginButton.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
+        <val key="LoginButton.press#marUnit" value="2,2,2,2" />
+        <val key="LoginButton.press#margin" value="3.0,3.0,1.0,1.0" />
+        <val key="LoginButton.press#padUnit" value="2,2,2,2" />
+        <val key="LoginButton.press#padding" value="2.0,2.0,2.0,2.0" />
+        <val key="LoginButton.press#transparency" value="255" />
+        <val key="LoginButton.sel#align" value="4" />
+        <val key="LoginButton.sel#bgColor" value="cc66ff" />
+        <val key="LoginButton.sel#fgColor" value="ff33" />
+        <font key="LoginButton.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
+        <val key="LoginButton.sel#marUnit" value="2,2,2,2" />
+        <val key="LoginButton.sel#margin" value="3.0,3.0,1.0,1.0" />
+        <val key="LoginButton.sel#padUnit" value="2,2,2,2" />
+        <val key="LoginButton.sel#padding" value="2.0,2.0,2.0,2.0" />
+        <val key="LoginButton.sel#transparency" value="255" />
+        <val key="LoginButton.transparency" value="255" />
+        <val key="TextField.bgImage" value="text-field-underline.png" />
+        <val key="TextField.bgType" value="30" />
+        <border key="TextField.border" type="empty" />
+        <val key="TextField.fgColor" value="ffffff" />
+        <font key="TextField.font" type="ttf" face="0" style="0" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="2.5" />
+        <val key="TextField.padUnit" value="2,2,2,2" />
+        <val key="TextField.padding" value="1.0,1.0,1.0,1.0" />
+        <val key="TextField.sel#bgImage" value="text-field-underline.png" />
+        <val key="TextField.sel#bgType" value="21" />
+        <border key="TextField.sel#border" type="empty" />
+        <val key="TextField.sel#fgColor" value="ffffff" />
+        <font key="TextField.sel#font" type="ttf" face="0" style="0" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="3.0" />
+        <val key="TextField.sel#transparency" value="0" />
+        <val key="TextField.transparency" value="0" />
+        <val key="loginForm.bgImage" value="fs2.jpg" />
+        <val key="loginForm.bgType" value="33" />
+        <val key="loginForm.transparency" value="255" />
+        <val key="transparency" value="0" />
+    </theme>
+</resource>
