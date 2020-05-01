@@ -30,7 +30,7 @@ public class TunisiaGotTalent {
 
         theme = UIManager.initFirstTheme("/theme");
 
-         Toolbar.setGlobalToolbar(true);
+        Toolbar.setGlobalToolbar(true);
         Toolbar.setCenteredDefault(false);
         // Pro only feature
         Log.bindCrashProtection(true);

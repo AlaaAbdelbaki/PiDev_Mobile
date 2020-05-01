@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="BackgroundRect.png"  />
     <image name="fs2.jpg"  />
     <image name="logo.png"  />
-    <image name="mp4.jpg"  />
+    <image name="round-mask.png"  />
+    <image name="sidemenu-top.png"  />
     <image name="text-field-underline.png"  />
     <theme name="Theme">
         <val key="@includeNativeBool" value="true" />
@@ -13,6 +15,7 @@
         <font key="CreateNewAccountButton.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
         <val key="CreateNewAccountButton.margin" value="4.0,0.0,0.0,0.0" />
         <val key="CreateNewAccountButton.transparency" value="0" />
+        <val key="Label.transparency" value="0" />
         <val key="LoginButton.align" value="4" />
         <val key="LoginButton.bgColor" value="990099" />
         <val key="LoginButton.fgColor" value="ffffff" />
@@ -40,6 +43,52 @@
         <val key="LoginButton.sel#padding" value="2.0,2.0,2.0,2.0" />
         <val key="LoginButton.sel#transparency" value="255" />
         <val key="LoginButton.transparency" value="255" />
+        <val key="ProfilePic.align" value="4" />
+        <val key="ProfilePic.padUnit" value="2,2,2,2" />
+        <val key="ProfilePic.padding" value="3.0,3.0,3.0,3.0" />
+        <val key="ProfilePic.transparency" value="0" />
+        <val key="SideCommand.align" value="1" />
+        <border key="SideCommand.border" type="empty" />
+        <val key="SideCommand.fgColor" value="a6aff1" />
+        <font key="SideCommand.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <val key="SideCommand.padUnit" value="2,2,2,2" />
+        <val key="SideCommand.padding" value="3.0,0.0,3.0,2.0" />
+        <val key="SideCommand.press#align" value="1" />
+        <border key="SideCommand.press#border" type="empty" />
+        <val key="SideCommand.press#fgColor" value="a6aff1" />
+        <font key="SideCommand.press#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <val key="SideCommand.press#padUnit" value="2,2,2,2" />
+        <val key="SideCommand.press#padding" value="3.0,0.0,3.0,2.0" />
+        <val key="SideCommand.press#transparency" value="0" />
+        <val key="SideCommand.sel#align" value="1" />
+        <border key="SideCommand.sel#border" type="empty" />
+        <val key="SideCommand.sel#fgColor" value="a6aff1" />
+        <font key="SideCommand.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <val key="SideCommand.sel#padUnit" value="2,2,2,2" />
+        <val key="SideCommand.sel#padding" value="3.0,0.0,3.0,2.0" />
+        <val key="SideCommand.sel#transparency" value="0" />
+        <val key="SideCommand.transparency" value="0" />
+        <val key="SideMenuTitle.fgColor" value="ffffff" />
+        <font key="SideMenuTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />
+        <val key="SideMenuTitle.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="SideMenuTitle.padUnit" value="2,2,2,2" />
+        <val key="SideMenuTitle.padding" value="1.0,0.0,1.0,1.0" />
+        <val key="SideMenuTitle.transparency" value="0" />
+        <val key="SideNavigationPanel.bgColor" value="1d224b" />
+        <gradient key="SideNavigationPanel.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="SideNavigationPanel.bgType" value="0" />
+        <border key="SideNavigationPanel.border" type="empty" />
+        <val key="SideNavigationPanel.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="SideNavigationPanel.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="SideNavigationPanel.transparency" value="255" />
+        <val key="SidemenuTop.bgImage" value="sidemenu-top.png" />
+        <val key="SidemenuTop.bgType" value="33" />
+        <val key="SidemenuTop.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="SidemenuTop.padUnit" value="2,2,2,2" />
+        <val key="SidemenuTop.padding" value="20.0,2.0,2.0,2.0" />
+        <val key="StatusBarSideMenu.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="StatusBarSideMenu.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="StatusBarSideMenu.transparency" value="0" />
         <val key="TextField.bgImage" value="text-field-underline.png" />
         <val key="TextField.bgType" value="30" />
         <border key="TextField.border" type="empty" />
@@ -54,9 +103,12 @@
         <font key="TextField.sel#font" type="ttf" face="0" style="0" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="3.0" />
         <val key="TextField.sel#transparency" value="0" />
         <val key="TextField.transparency" value="0" />
+        <val key="Toolbar.bgImage" value="BackgroundRect.png" />
+        <val key="Toolbar.bgType" value="33" />
+        <border key="Toolbar.border" type="empty" />
         <val key="loginForm.bgImage" value="fs2.jpg" />
         <val key="loginForm.bgType" value="33" />
         <val key="loginForm.transparency" value="255" />
-        <val key="transparency" value="0" />
     </theme>
+    <image name="user-picture.jpg"  />
 </resource>

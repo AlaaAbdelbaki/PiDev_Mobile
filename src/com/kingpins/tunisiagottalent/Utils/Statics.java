@@ -10,5 +10,5 @@ package com.kingpins.tunisiagottalent.Utils;
  * @author Anis
  */
 public class Statics {
-    public static final String BASE_URL="http://41.226.11.252:11300";
+    public static final String BASE_URL="http://127.0.0.1:8000/api";
 }

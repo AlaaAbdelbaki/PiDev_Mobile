@@ -21,6 +21,7 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.kingpins.tunisiagottalent.Services.UserServices;
 
 /**
  *
@@ -36,6 +37,7 @@ public class LoginForm extends Form{
         );*/
         
         getTitleArea().setUIID("Container");
+       
         
         Image logo = theme.getImage("logo.png");
          ImageViewer logoViewer= new ImageViewer(logo);
@@ -55,9 +57,11 @@ public class LoginForm extends Form{
         Button loginButton = new Button("LOGIN");
         loginButton.setUIID("LoginButton");
         loginButton.addActionListener(e -> {
-            Toolbar.setGlobalToolbar(false);
-           // new WalkthruForm(theme).show();
-            Toolbar.setGlobalToolbar(true);
+           
+           new UserServices().loginAction(login.getText(), password.getText());
+           new HomeForm(theme).show();
+           
+           
         });
         
         Button createNewAccount = new Button("CREATE NEW ACCOUNT");
