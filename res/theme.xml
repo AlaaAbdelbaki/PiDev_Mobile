@@ -4,6 +4,7 @@
     <image name="BackgroundRect.png"  />
     <image name="fs2.jpg"  />
     <image name="logo.png"  />
+    <image name="mp4.jpg"  />
     <image name="round-mask.png"  />
     <image name="sidemenu-top.png"  />
     <image name="text-field-underline.png"  />
@@ -14,6 +15,18 @@
         <val key="CreateNewAccountButton.fgColor" value="ffffff" />
         <font key="CreateNewAccountButton.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
         <val key="CreateNewAccountButton.margin" value="4.0,0.0,0.0,0.0" />
+        <val key="CreateNewAccountButton.press#align" value="4" />
+        <val key="CreateNewAccountButton.press#bgColor" value="ff00" />
+        <val key="CreateNewAccountButton.press#fgColor" value="ff00" />
+        <font key="CreateNewAccountButton.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.5" />
+        <val key="CreateNewAccountButton.press#margin" value="4.0,0.0,0.0,0.0" />
+        <val key="CreateNewAccountButton.press#transparency" value="0" />
+        <val key="CreateNewAccountButton.sel#align" value="4" />
+        <val key="CreateNewAccountButton.sel#bgColor" value="ff00" />
+        <val key="CreateNewAccountButton.sel#fgColor" value="ffffff" />
+        <font key="CreateNewAccountButton.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
+        <val key="CreateNewAccountButton.sel#margin" value="4.0,0.0,0.0,0.0" />
+        <val key="CreateNewAccountButton.sel#transparency" value="0" />
         <val key="CreateNewAccountButton.transparency" value="0" />
         <val key="Label.transparency" value="0" />
         <val key="LoginButton.align" value="4" />
@@ -50,9 +63,9 @@
         <val key="SideCommand.align" value="1" />
         <border key="SideCommand.border" type="empty" />
         <val key="SideCommand.fgColor" value="a6aff1" />
-        <font key="SideCommand.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <font key="SideCommand.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
         <val key="SideCommand.padUnit" value="2,2,2,2" />
-        <val key="SideCommand.padding" value="3.0,0.0,3.0,2.0" />
+        <val key="SideCommand.padding" value="4.0,0.0,3.0,2.0" />
         <val key="SideCommand.press#align" value="1" />
         <border key="SideCommand.press#border" type="empty" />
         <val key="SideCommand.press#fgColor" value="a6aff1" />
@@ -81,7 +94,7 @@
         <val key="SideNavigationPanel.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SideNavigationPanel.padding" value="0.0,0.0,0.0,0.0" />
         <val key="SideNavigationPanel.transparency" value="255" />
-        <val key="SidemenuTop.bgImage" value="sidemenu-top.png" />
+        <val key="SidemenuTop.bgImage" value="mp4.jpg" />
         <val key="SidemenuTop.bgType" value="33" />
         <val key="SidemenuTop.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SidemenuTop.padUnit" value="2,2,2,2" />
@@ -103,9 +116,17 @@
         <font key="TextField.sel#font" type="ttf" face="0" style="0" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="3.0" />
         <val key="TextField.sel#transparency" value="0" />
         <val key="TextField.transparency" value="0" />
-        <val key="Toolbar.bgImage" value="BackgroundRect.png" />
-        <val key="Toolbar.bgType" value="33" />
+        <val key="Title.fgColor" value="ffffff" />
+        <font key="Title.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.5" />
+        <val key="Title.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="Title.padUnit" value="2,2,2,2" />
+        <val key="Title.padding" value="1.0,0.0,1.0,1.0" />
+        <val key="Title.transparency" value="0" />
+        <val key="Toolbar.bgColor" value="3333ff" />
+        <val key="Toolbar.bgImage" value="logo.png" />
+        <val key="Toolbar.bgType" value="34" />
         <border key="Toolbar.border" type="empty" />
+        <val key="Toolbar.transparency" value="158" />
         <val key="loginForm.bgImage" value="fs2.jpg" />
         <val key="loginForm.bgType" value="33" />
         <val key="loginForm.transparency" value="255" />

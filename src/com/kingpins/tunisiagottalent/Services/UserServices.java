@@ -30,7 +30,7 @@ import java.util.Map;
 public class UserServices {
 
     public static UserServices instance;
-    private ConnectionRequest con;
+    private final ConnectionRequest con;
 
     public UserServices() {
         con = new ConnectionRequest();
@@ -42,25 +42,28 @@ public class UserServices {
         }
         return instance;
     }
+    boolean result;
 
-    public void loginAction(String username, String password) {
+    public boolean loginAction(String username, String password) {
+
         // création d'une nouvelle demande de connexion
         String url = Statics.BASE_URL + "/login/" + username + "/" + password;
         con.setUrl(url);// Insertion de l'URL de notre demande de connexion
 
         con.addResponseListener((e) -> {
-            boolean result = con.getResponseCode() == 200;
-            System.out.println(result);
-            try {
-                parseListUserJson(new String(con.getResponseData()));
-                // String str = new String(con.getResponseData());//Récupération de la réponse du serveur
+            result = con.getResponseCode() == 200;
+            if (result) {
+                try {
+                    parseListUserJson(new String(con.getResponseData()));
+                    // String str = new String(con.getResponseData());//Récupération de la réponse du serveur
+                    // System.out.println(str);//Affichage de la réponse serveur sur la console
+                } catch (ParseException ex) {
 
-                // System.out.println(str);//Affichage de la réponse serveur sur la console
-            } catch (ParseException ex) {
-
+                }
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(con);// Ajout de notre demande de connexion à la file d'attente du NetworkManager
+        return result;
     }
 
     public User parseListUserJson(String json) throws ParseException {
@@ -74,14 +77,30 @@ public class UserServices {
             u.setUsername(obj.get("username").toString());
             u.setEmail(obj.get("email").toString());
             u.setRole(obj.get("roles").toString());
-            u.setBirthday(new Date((((Double) ((Map<String, Object>) obj.get("birthday")).get("timestamp")).longValue() * 1000)));
-            u.setProfilePic(obj.get("profilePic").toString());
-            u.setGender(obj.get("sexe").toString());
-            u.setPhone_number(obj.get("telephoneNumber").toString());
-            u.setAddress(obj.get("adresse").toString());
-            u.setName(obj.get("name").toString());
-            u.setLastName(obj.get("firstName").toString());
-            u.setBio(obj.get("bio").toString());
+            if (obj.get("birthday") != null) {
+                u.setBirthday(new Date((((Double) ((Map<String, Object>) obj.get("birthday")).get("timestamp")).longValue() * 1000)));
+            }
+            if (obj.get("profilePic") != null) {
+                u.setProfilePic(obj.get("profilePic").toString());
+            }
+            if (obj.get("sexe") != null) {
+                u.setGender(obj.get("sexe").toString());
+            }
+            if (obj.get("telephoneNumber") != null) {
+                u.setPhone_number(obj.get("telephoneNumber").toString());
+            }
+            if (obj.get("adresse") != null) {
+                u.setAddress(obj.get("adresse").toString());
+            }
+            if (obj.get("name") != null) {
+                u.setName(obj.get("name").toString());
+            }
+            if (obj.get("firstName") != null) {
+                u.setLastName(obj.get("firstName").toString());
+            }
+            if (obj.get("bio") != null) {
+                u.setBio(obj.get("bio").toString());
+            }
             UserSession z = UserSession.getInstance(u);
             System.out.println(UserSession.instance);
 

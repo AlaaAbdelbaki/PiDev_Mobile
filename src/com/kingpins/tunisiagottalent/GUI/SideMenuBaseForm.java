@@ -18,12 +18,14 @@
  */
 package com.kingpins.tunisiagottalent.GUI;
 
+import com.codename1.components.ImageViewer;
 import com.codename1.components.ToastBar;
 import com.codename1.io.Storage;
 import com.codename1.ui.Container;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
@@ -57,28 +59,23 @@ public abstract class SideMenuBaseForm extends Form {
     }
 
     public void setupSideMenu(Resources res) throws IOException {
-        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(100, 100), true);
-        URLImage profilePic = URLImage.createToStorage(placeholder, UserSession.instance.getU().getProfilePic(),
-                "http://127.0.0.1:8000/assets/uploads/" + UserSession.instance.getU().getProfilePic());
-        profilePic.fetch();
-
-        Image mask = res.getImage("round-mask.png");
-        mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
-        //  profilePic = (URLImage) profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label(UserSession.instance.getU().getUsername(), profilePic, "SideMenuTitle");
-        profilePicLabel.setMask(mask.createMask());
-
-        Container sidemenuTop = BorderLayout.center(profilePicLabel);
+     
+        Image logo = res.getImage("logo.png");
+      
+        ImageViewer im =new ImageViewer(logo);
+        Container sidemenuTop = BorderLayout.center(im);
         sidemenuTop.setUIID("SidemenuTop");
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, e -> showOtherForm(res));
+         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT, e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST, e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Reviews", FontImage.MATERIAL_THUMB_UP, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {new LoginForm(res).show();
+        UserSession.instance.cleanUserSession();});
     }
 
     protected abstract void showOtherForm(Resources res);

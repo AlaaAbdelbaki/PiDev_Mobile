@@ -23,13 +23,14 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import java.io.IOException;
 
 /**
  *
  * @author Anis
  */
 public class HomeForm extends SideMenuBaseForm{
-    public HomeForm(Resources res) {
+    public HomeForm(Resources res) throws IOException {
         super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
