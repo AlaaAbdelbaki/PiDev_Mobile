@@ -36,7 +36,7 @@ public class LoginForm extends Form {
 
     public LoginForm(Resources theme) {
         super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
-        this.us = UserServices.instance;
+        this.us = UserServices.getInstance();
         setUIID("loginForm");
 
         getTitleArea().setUIID("Container");
@@ -62,7 +62,7 @@ public class LoginForm extends Form {
             if ((login.getText().length() == 0) || (password.getText().length() == 0)) {
                 Dialog.show("Alert", "Please fill all fields", new Command("OK"));
             } else {
-
+                System.out.println(us);
                 if (us.loginAction(login.getText(), password.getText())) {
                     try {
                         new HomeForm(theme).show();

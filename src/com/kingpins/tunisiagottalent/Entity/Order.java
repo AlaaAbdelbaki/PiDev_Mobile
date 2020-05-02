@@ -5,7 +5,11 @@
  */
 package com.kingpins.tunisiagottalent.Entity;
 
-import java.sql.Date;
+import java.util.Date;
+
+
+
+
 /**
  *
  * @author paspo

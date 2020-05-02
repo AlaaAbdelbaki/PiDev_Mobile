@@ -1,16 +1,19 @@
 package com.kingpins.tunisiagottalent.Entity;
 
+import java.util.Date;
 
-import java.sql.Timestamp;
+
+
+
 
 public class video {
     private int id;
     private String url;
     private String title;
-    private Timestamp publish_date;
+    private Date publish_date;
     private User owner;
 
-    public video(int id, String url, String title, Timestamp publish_date, User owner) {
+    public video(int id, String url, String title, Date publish_date, User owner) {
         this.id = id;
         this.url = url;
         this.title = title;
@@ -18,7 +21,7 @@ public class video {
         this.owner = owner;
     }
 
-    public video(String url, String title, Timestamp publish_date, User owner) {
+    public video(String url, String title, Date publish_date, User owner) {
         this.url = url;
         this.title = title;
         this.publish_date = publish_date;
@@ -49,11 +52,11 @@ public class video {
         this.title = title;
     }
 
-    public Timestamp getPublish_date() {
+    public Date getPublish_date() {
         return publish_date;
     }
 
-    public void setPublish_date(Timestamp publish_date) {
+    public void setPublish_date(Date publish_date) {
         this.publish_date = publish_date;
     }
 

@@ -5,7 +5,8 @@
  */
 package com.kingpins.tunisiagottalent.Entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
 
 /**
  *
@@ -16,7 +17,7 @@ public class Comments {
     private User author;
     private String body;
 
-    public Comments(int id, User author, String body, Timestamp created_at) {
+    public Comments(int id, User author, String body, Date created_at) {
         this.id = id;
         this.author = author;
         this.body = body;
@@ -30,7 +31,7 @@ public class Comments {
     public void setBody(String body) {
         this.body = body;
     }
-    private Timestamp created_at;
+    private Date created_at;
 
     
 
@@ -50,11 +51,11 @@ public class Comments {
         this.author = author;
     }
 
-    public Timestamp getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Timestamp created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 

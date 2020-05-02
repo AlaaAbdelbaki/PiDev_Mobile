@@ -1,16 +1,15 @@
 package com.kingpins.tunisiagottalent.Entity;
 
-
-import java.sql.Timestamp;
+import java.util.Date;
 
 
 public class Competition {
     private int id;
     private String subject;
-    private Timestamp competition_date;
-    private Timestamp competition_end_date;
+    private Date competition_date;
+    private Date competition_end_date;
 
-    public Competition(String subject, Timestamp competition_date, Timestamp competition_end_date) {
+    public Competition(String subject, Date competition_date, Date competition_end_date) {
         this.subject = subject;
         this.competition_date = competition_date;
         this.competition_end_date = competition_end_date;
@@ -32,23 +31,23 @@ public class Competition {
         this.subject = subject;
     }
 
-    public Timestamp getCompetition_date() {
+    public Date getCompetition_date() {
         return competition_date;
     }
 
-    public void setCompetition_date(Timestamp competition_date) {
+    public void setCompetition_date(Date competition_date) {
         this.competition_date = competition_date;
     }
 
-    public Timestamp getCompetition_end_date() {
+    public Date getCompetition_end_date() {
         return competition_end_date;
     }
 
-    public void setCompetition_end_date(Timestamp competition_end_date) {
+    public void setCompetition_end_date(Date competition_end_date) {
         this.competition_end_date = competition_end_date;
     }
 
-    public Competition(int id, String subject, Timestamp competition_date, Timestamp competition_end_date) {
+    public Competition(int id, String subject, Date competition_date, Date competition_end_date) {
         this.id = id;
         this.subject = subject;
         this.competition_date = competition_date;

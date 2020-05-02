@@ -5,7 +5,6 @@
  */
 package com.kingpins.tunisiagottalent.Entity;
 
-import javafx.scene.image.ImageView;
 
 /**
  *
@@ -56,7 +55,7 @@ public class Product {
     }
 
     public Product(Product cart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     

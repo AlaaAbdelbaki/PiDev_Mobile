@@ -131,5 +131,12 @@
         <val key="loginForm.bgType" value="33" />
         <val key="loginForm.transparency" value="255" />
     </theme>
+    <theme name="ThemeComp">
+        <val key="@includeNativeBool" value="true" />
+        <val key="CompForm.bgColor" value="ff3300" />
+        <val key="CompForm.bgImage" value="fs2.jpg" />
+        <val key="CompForm.bgType" value="34" />
+        <val key="CompForm.transparency" value="178" />
+    </theme>
     <image name="user-picture.jpg"  />
 </resource>

@@ -55,8 +55,8 @@ public class UserServices {
             if (result) {
                 try {
                     parseListUserJson(new String(con.getResponseData()));
-                    // String str = new String(con.getResponseData());//Récupération de la réponse du serveur
-                    // System.out.println(str);//Affichage de la réponse serveur sur la console
+                    String str = new String(con.getResponseData());//Récupération de la réponse du serveur
+                     System.out.println(str);//Affichage de la réponse serveur sur la console
                 } catch (ParseException ex) {
 
                 }
