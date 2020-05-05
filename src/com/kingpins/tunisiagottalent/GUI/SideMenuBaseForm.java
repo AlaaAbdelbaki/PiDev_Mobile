@@ -34,7 +34,6 @@ import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
 import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
-import java.io.InputStream;
 
 
 /**
@@ -60,30 +59,35 @@ public abstract class SideMenuBaseForm extends Form {
     }
 
     public void setupSideMenu(Resources res) throws IOException {
-     
+
         Image logo = res.getImage("logo.png");
-      
-        ImageViewer im =new ImageViewer(logo);
+
+        ImageViewer im = new ImageViewer(logo);
         Container sidemenuTop = BorderLayout.center(im);
         sidemenuTop.setUIID("SidemenuTop");
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, e -> showOtherForm(res));
-         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT, e -> showOtherForm(res));
+        getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME,null);
+        getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> {
+            try {
+                new ProfileForm(res).show();
+            } catch (IOException ex) {
+            }
+        });
+        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP,null);
+        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT,null);
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {
             try {
                 new CompetitionsForm(res).show();
             } catch (IOException ex) {
-               
+
             }
         });
-        getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Reviews", FontImage.MATERIAL_THUMB_UP, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {new LoginForm(res).show();
-        UserSession.instance.cleanUserSession();});
+        getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST,null);
+        getToolbar().addMaterialCommandToSideMenu("  Reviews", FontImage.MATERIAL_THUMB_UP,null);
+        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            new LoginForm(res).show();
+            UserSession.instance.cleanUserSession();
+        });
     }
-
-    protected abstract void showOtherForm(Resources res);
 }

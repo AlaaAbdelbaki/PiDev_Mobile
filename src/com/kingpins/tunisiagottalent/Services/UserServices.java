@@ -9,10 +9,9 @@ import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
-import com.codename1.l10n.DateFormat;
-import com.codename1.l10n.DateFormatPatterns;
+
 import com.codename1.l10n.ParseException;
-import com.codename1.l10n.SimpleDateFormat;
+
 
 import com.kingpins.tunisiagottalent.Entity.User;
 import com.kingpins.tunisiagottalent.Utils.Statics;
@@ -20,7 +19,7 @@ import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
 
 import java.util.Date;
-import java.util.List;
+
 import java.util.Map;
 
 /**
@@ -109,5 +108,7 @@ public class UserServices {
 
         return u;
     }
+    
+   
 
 }

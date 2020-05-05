@@ -13,6 +13,11 @@ public class video {
     private Date publish_date;
     private User owner;
 
+    public video() {
+    }
+    
+    
+    
     public video(int id, String url, String title, Date publish_date, User owner) {
         this.id = id;
         this.url = url;
