@@ -8,6 +8,7 @@ package com.kingpins.tunisiagottalent.GUI;
 import com.codename1.capture.Capture;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InfiniteProgress;
+import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ext.filechooser.FileChooser;
 import com.codename1.io.File;
@@ -78,10 +79,14 @@ public class UpdateProfileForm extends Form {
     Button deleteAccount = new Button("Delete Account");
     Button submit = new Button("Submit");
     Button uploadPic = new Button("Upload profile picture");
+    Button takePic = new Button("Take a picture");
     ImageViewer imgv;
+    
+    
 
     //Containers
     Container updateProfileContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+    Container uploadProfilePic = new Container(new FlowLayout(CENTER,CENTER));
     Container buttons = new Container(new FlowLayout(CENTER, CENTER));
     User user = us.getUser(UserSession.instance.getU().getId());
 
@@ -136,7 +141,9 @@ public class UpdateProfileForm extends Form {
         updateProfileContainer.add(lastNameLabel);
         updateProfileContainer.add(lastNameInput);
         updateProfileContainer.add(uploadPicLabel);
-        updateProfileContainer.add(uploadPic);
+        uploadProfilePic.add(uploadPic);
+        uploadProfilePic.add(takePic);
+        updateProfileContainer.add(uploadProfilePic);
 //        updateProfileContainer.add(imgv);
         updateProfileContainer.add(birthdayLabel);
         updateProfileContainer.add(birthdayInput);
@@ -186,7 +193,40 @@ public class UpdateProfileForm extends Form {
 //
 //                } catch (IOException ex) {
 //                }
-                
+                System.out.println(filePath);
+
+                NetworkManager.getInstance().addToQueueAndWait(cr);
+            }
+        });
+        takePic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                MultipartRequest cr = new MultipartRequest();
+                String filePath = Capture.capturePhoto();
+                cr.setUrl(Statics.BASE_URL + "/upload=" + UserSession.instance.getU().getId());
+                cr.setPost(true);
+                String mime = "image/jpeg";
+                try {
+                    cr.addData("file", filePath, mime);
+                } catch (IOException ex) {
+                }
+                cr.setFilename("file", randomName() + ".jpg");//any unique name you want
+
+                InfiniteProgress prog = new InfiniteProgress();
+                Dialog dlg = prog.showInifiniteBlocking();
+                cr.setDisposeOnCompletion(dlg);
+//                String linkProfilePic = "http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic();
+//                Image profilePic;
+//                EncodedImage enc;
+//                try {
+//                    enc = EncodedImage.create("/load.png");
+//                    profilePic = URLImage.createToStorage(enc, linkProfilePic, linkProfilePic);
+//                    profilePic.scale(enc.getWidth(), enc.getHeight());
+//                    imgv = new ImageViewer(profilePic);
+//
+//                } catch (IOException ex) {
+//                }
+                System.out.println(filePath);
 
                 NetworkManager.getInstance().addToQueueAndWait(cr);
             }
@@ -244,7 +284,7 @@ public class UpdateProfileForm extends Form {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 Dialog alert = new Dialog("Warning");
-                TextArea message = new TextArea("Are you sure you want to delete your account?\nThis action once done cannot be reverted!");
+                SpanLabel message = new SpanLabel("Are you sure you want to delete your account?\nThis action once done cannot be reverted!");
                 alert.add(message);
                 Button ok = new Button("Proceed");
                 Button cancel = new Button(new Command("Cancel"));

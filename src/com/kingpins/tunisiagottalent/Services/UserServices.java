@@ -15,6 +15,7 @@ import com.codename1.l10n.ParseException;
 import com.codename1.ui.events.ActionListener;
 
 import com.kingpins.tunisiagottalent.Entity.User;
+import com.kingpins.tunisiagottalent.Entity.video;
 import com.kingpins.tunisiagottalent.Utils.Statics;
 import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
@@ -220,6 +221,19 @@ public class UserServices {
         pwd2 = "$2y" + pwd2;
 //        System.out.println(pwd2);
         return pwd2;
+    }
+    
+    public boolean addVideo(video v){
+        String url = Statics.BASE_URL + "/videos/add?url="+v.getUrl()+"&title="+v.getTitle()+"&id="+v.getOwner().getId();
+        ConnectionRequest req = new ConnectionRequest(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ResultOK = req.getResponseCode() == 200;
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return ResultOK;
     }
 
 }
