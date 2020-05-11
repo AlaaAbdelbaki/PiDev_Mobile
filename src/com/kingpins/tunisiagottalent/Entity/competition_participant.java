@@ -8,24 +8,24 @@ import java.util.Date;
 
 public class competition_participant {
     private int id;
-    private Competition competition_id;
-    private User user_id;
+    private Competition competition;
+    private User user;
     private Date participation_date;
-    private video video_id;
+    private video video;
 
     public competition_participant(int id, Competition competition_id, User user_id, Date participation_date, video video_id) {
         this.id = id;
-        this.competition_id = competition_id;
-        this.user_id = user_id;
+        this.competition = competition_id;
+        this.user = user_id;
         this.participation_date = participation_date;
-        this.video_id = video_id;
+        this.video = video_id;
     }
 
     public competition_participant(Competition competition_id, User user_id, Date participation_date, video video_id) {
-        this.competition_id = competition_id;
-        this.user_id = user_id;
+        this.competition = competition_id;
+        this.user = user_id;
         this.participation_date = participation_date;
-        this.video_id = video_id;
+        this.video = video_id;
     }
 
     public competition_participant() {
@@ -41,19 +41,19 @@ public class competition_participant {
     }
 
     public Integer getCompetition_id() {
-        return competition_id.getId();
+        return competition.getId();
     }
 
     public void setCompetition_id(Competition competition_id) {
-        this.competition_id = competition_id;
+        this.competition = competition_id;
     }
 
     public String getUser_id() {
-        return user_id.getUsername();
+        return user.getUsername();
     }
 
     public void setUser_id(User user_id) {
-        this.user_id = user_id;
+        this.user = user_id;
     }
 
     public Date getParticipation_date() {
@@ -65,21 +65,21 @@ public class competition_participant {
     }
 
     public video getVideo_id() {
-        return video_id;
+        return video;
     }
 
     public void setVideo_id(video video_id) {
-        this.video_id = video_id;
+        this.video = video_id;
     }
 
     @Override
     public String toString() {
         return "competition_participant{" +
                 "id=" + id +
-                ", competition_id=" + competition_id +
-                ", user_id=" + user_id +
+                ", competition_id=" + competition +
+                ", user_id=" + user +
                 ", participation_date=" + participation_date +
-                ", video_id=" + video_id +
+                ", video_id=" + video +
                 '}';
     }
 }

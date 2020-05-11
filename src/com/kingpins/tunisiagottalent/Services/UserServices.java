@@ -52,11 +52,12 @@ public class UserServices {
 
         con.addResponseListener((e) -> {
             result = con.getResponseCode() == 200;
+            
             if (result) {
                 try {
                     parseListUserJson(new String(con.getResponseData()));
                     String str = new String(con.getResponseData());//Récupération de la réponse du serveur
-                     System.out.println(str);//Affichage de la réponse serveur sur la console
+                    // System.out.println(str);//Affichage de la réponse serveur sur la console
                 } catch (ParseException ex) {
 
                 }
@@ -102,7 +103,7 @@ public class UserServices {
                 u.setBio(obj.get("bio").toString());
             }
             UserSession z = UserSession.getInstance(u);
-            System.out.println(UserSession.instance);
+            
 
         } catch (IOException ex) {
         }

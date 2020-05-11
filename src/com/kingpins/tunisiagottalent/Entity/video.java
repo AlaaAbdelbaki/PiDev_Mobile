@@ -1,6 +1,7 @@
 package com.kingpins.tunisiagottalent.Entity;
 
 import java.util.Date;
+import java.util.List;
 
 
 
@@ -12,6 +13,18 @@ public class video {
     private String title;
     private Date publish_date;
     private User owner;
+    private List<Integer> Votes;
+
+    public List<Integer> getNbVote() {
+        return Votes;
+    }
+
+    public void setVotes(List<Integer> Votes) {
+        this.Votes = Votes;
+    }
+
+    public video() {
+    }
 
     public video(int id, String url, String title, Date publish_date, User owner) {
         this.id = id;
@@ -70,12 +83,10 @@ public class video {
 
     @Override
     public String toString() {
-        return "video{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                ", title='" + title + '\'' +
-                ", publish_date=" + publish_date +
-                ", owner=" + owner +
-                '}';
+        return "video{" + "id=" + id + ", url=" + url + ", title=" + title + ", publish_date=" + publish_date + ", owner=" + owner + ", Votes=" + Votes + '}';
     }
+
+   
+
+    
 }

@@ -32,12 +32,7 @@ import java.io.IOException;
 public class HomeForm extends SideMenuBaseForm{
     public HomeForm(Resources res) throws IOException {
         super(BoxLayout.y());
-        Toolbar tb = getToolbar();
-        tb.setTitleCentered(false);
-        Button menuButton = new Button("");
-        menuButton.setUIID("Title");
-        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-        menuButton.addActionListener(e -> getToolbar().openSideMenu());
+
         
        
         setupSideMenu(res);
@@ -45,8 +40,5 @@ public class HomeForm extends SideMenuBaseForm{
     
    
 
-    @Override
-    protected void showOtherForm(Resources res) {
-     //   new StatsForm(res).show();
-    }
+    
 }

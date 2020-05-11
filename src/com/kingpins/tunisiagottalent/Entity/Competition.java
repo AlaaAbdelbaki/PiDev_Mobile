@@ -8,7 +8,7 @@ public class Competition {
     private String subject;
     private Date competition_date;
     private Date competition_end_date;
-
+     public Competition(){};
     public Competition(String subject, Date competition_date, Date competition_end_date) {
         this.subject = subject;
         this.competition_date = competition_date;

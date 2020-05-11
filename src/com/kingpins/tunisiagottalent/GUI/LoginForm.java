@@ -62,7 +62,7 @@ public class LoginForm extends Form {
             if ((login.getText().length() == 0) || (password.getText().length() == 0)) {
                 Dialog.show("Alert", "Please fill all fields", new Command("OK"));
             } else {
-                System.out.println(us);
+                
                 if (us.loginAction(login.getText(), password.getText())) {
                     try {
                         new HomeForm(theme).show();

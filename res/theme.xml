@@ -2,14 +2,22 @@
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="BackgroundRect.png"  />
+    <image name="bg-4.jpg"  />
+    <image name="breadcumb2.jpg"  />
+    <image name="fs1.jpg"  />
     <image name="fs2.jpg"  />
     <image name="logo.png"  />
     <image name="mp4.jpg"  />
     <image name="round-mask.png"  />
+    <image name="selected-walkthru.png"  />
     <image name="sidemenu-top.png"  />
     <image name="text-field-underline.png"  />
     <theme name="Theme">
         <val key="@includeNativeBool" value="true" />
+        <gradient key="CompForm.bgGradient" color1="19605" color2="14949450" posX="0.51" posY="0.51" radius="1.0" />
+        <val key="CompForm.bgType" value="7" />
+        <val key="CompForm.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="CompForm.padding" value="0.0,0.0,0.0,0.0" />
         <val key="CreateNewAccountButton.align" value="4" />
         <val key="CreateNewAccountButton.bgColor" value="ff00" />
         <val key="CreateNewAccountButton.fgColor" value="ffffff" />
@@ -28,6 +36,8 @@
         <val key="CreateNewAccountButton.sel#margin" value="4.0,0.0,0.0,0.0" />
         <val key="CreateNewAccountButton.sel#transparency" value="0" />
         <val key="CreateNewAccountButton.transparency" value="0" />
+        <val key="Label.fgColor" value="ffffff" />
+        <font key="Label.font" type="ttf" face="0" style="1" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="3.5" />
         <val key="Label.transparency" value="0" />
         <val key="LoginButton.align" value="4" />
         <val key="LoginButton.bgColor" value="990099" />
@@ -122,21 +132,17 @@
         <val key="Title.padUnit" value="2,2,2,2" />
         <val key="Title.padding" value="1.0,0.0,1.0,1.0" />
         <val key="Title.transparency" value="0" />
-        <val key="Toolbar.bgColor" value="3333ff" />
+        <val key="TitleCommand.fgColor" value="ffffff" />
+        <val key="Toolbar.bgColor" value="990099" />
         <val key="Toolbar.bgImage" value="logo.png" />
         <val key="Toolbar.bgType" value="34" />
         <border key="Toolbar.border" type="empty" />
-        <val key="Toolbar.transparency" value="158" />
+        <val key="Toolbar.padding" value="10.0,0.0,0.0,0.0" />
+        <val key="Toolbar.transparency" value="208" />
         <val key="loginForm.bgImage" value="fs2.jpg" />
         <val key="loginForm.bgType" value="33" />
         <val key="loginForm.transparency" value="255" />
     </theme>
-    <theme name="ThemeComp">
-        <val key="@includeNativeBool" value="true" />
-        <val key="CompForm.bgColor" value="ff3300" />
-        <val key="CompForm.bgImage" value="fs2.jpg" />
-        <val key="CompForm.bgType" value="34" />
-        <val key="CompForm.transparency" value="178" />
-    </theme>
+    <image name="unselected-walkthru.png"  />
     <image name="user-picture.jpg"  />
 </resource>
