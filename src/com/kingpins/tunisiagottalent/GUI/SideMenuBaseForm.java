@@ -37,6 +37,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
+
+
+
 /**
  * Common code that can setup the side menu
  *
@@ -70,7 +73,14 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, e -> showOtherForm(res));
          getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, e -> showOtherForm(res));
+        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, e -> {
+            try {
+                new ShopForm(res).show();
+            } catch (IOException ex) {
+
+            }
+            
+        });
         getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT, e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {
             try {

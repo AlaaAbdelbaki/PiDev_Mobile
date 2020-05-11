@@ -39,7 +39,6 @@ public class HomeForm extends SideMenuBaseForm{
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
         menuButton.addActionListener(e -> getToolbar().openSideMenu());
         
-       
         setupSideMenu(res);
     }
     

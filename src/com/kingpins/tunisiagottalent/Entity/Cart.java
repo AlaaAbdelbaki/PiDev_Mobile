@@ -5,6 +5,7 @@
  */
 package com.kingpins.tunisiagottalent.Entity;
 
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,14 +13,14 @@ public final class Cart {
 
     public static Cart instance;
 
-    private final ObservableList<Product> c;
+    private final ArrayList<Product> c;
 
     public Cart() {
-        c = FXCollections.observableArrayList();
+        c = new ArrayList<Product>();
 
     }
 
-    public ObservableList<Product> getCartList() {
+    public ArrayList<Product> getCartList() {
         return c;
     }
 
@@ -32,7 +33,7 @@ public final class Cart {
        int productid = e.getId();
         for(int i=0 ; i<this.c.size();i++){
             Product product = this.c.get(i);
-            if(product.getId()==productid){
+            if(product.getProduct_name().equals(e.getProduct_name())){
                 this.c.remove(i);
             }
         }
@@ -41,7 +42,7 @@ public final class Cart {
     this.c.clear();
     }
 
-    public ObservableList<Product> getC() {
+    public ArrayList<Product> getC() {
         return c;
     }
 
