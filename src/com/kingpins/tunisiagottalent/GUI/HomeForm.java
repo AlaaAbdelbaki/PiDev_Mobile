@@ -45,8 +45,5 @@ public class HomeForm extends SideMenuBaseForm{
     
    
 
-    @Override
-    protected void showOtherForm(Resources res) {
-     //   new StatsForm(res).show();
-    }
+    
 }

@@ -21,6 +21,7 @@ package com.kingpins.tunisiagottalent.GUI;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.ToastBar;
 import com.codename1.io.Storage;
+import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
@@ -28,6 +29,7 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
@@ -60,7 +62,12 @@ public abstract class SideMenuBaseForm extends Form {
     }
 
     public void setupSideMenu(Resources res) throws IOException {
-     
+                Toolbar tb = getToolbar();
+        tb.setTitleCentered(false);
+        Button menuButton = new Button("");
+        menuButton.setUIID("Title");
+        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
+        menuButton.addActionListener(e -> getToolbar().openSideMenu());
         Image logo = res.getImage("logo.png");
       
         ImageViewer im =new ImageViewer(logo);
@@ -68,22 +75,21 @@ public abstract class SideMenuBaseForm extends Form {
         sidemenuTop.setUIID("SidemenuTop");
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, e -> showOtherForm(res));
-         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {
-            try {
-                new CompetitionsForm(res).show();
+        getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, null );
+         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, null);
+        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, null);
+        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT,null);
+        getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP,null);
+        getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST,(e->{
+        try {
+                new ArticleForm(res).show();
             } catch (IOException ex) {
                
-            }
-        });
-        getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Reviews", FontImage.MATERIAL_THUMB_UP, e -> showOtherForm(res));
+            }}));
+        getToolbar().addMaterialCommandToSideMenu("  Reviews", FontImage.MATERIAL_THUMB_UP, null);
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {new LoginForm(res).show();
         UserSession.instance.cleanUserSession();});
     }
 
-    protected abstract void showOtherForm(Resources res);
+   
 }
