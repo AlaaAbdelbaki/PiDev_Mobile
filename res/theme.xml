@@ -3,6 +3,7 @@
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="BackgroundRect.png"  />
     <image name="fs2.jpg"  />
+    <image name="insta_icon.png"  />
     <image name="logo.png"  />
     <image name="mp4.jpg"  />
     <image name="round-mask.png"  />
@@ -138,5 +139,6 @@
         <val key="CompForm.bgType" value="34" />
         <val key="CompForm.transparency" value="178" />
     </theme>
+    <image name="twitter_img.png"  />
     <image name="user-picture.jpg"  />
 </resource>

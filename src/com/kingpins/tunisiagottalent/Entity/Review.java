@@ -53,6 +53,13 @@ public class Review {
         this.rating = rating;
         this.content = content;
     }
+
+    public Review(String category, int rating, String content, String title) {
+        this.category = category;
+        this.rating = rating;
+        this.content = content;
+        this.title = title;
+    }
    
 
     
@@ -65,12 +72,6 @@ public class Review {
        
     }
 
-    public Review( String category,int rating,String content ) {
-        this.category = category;
-        this.rating = rating;
-        this.content = content;
-        
-    }
 
     public User getUser_id() {
         return user_id;
