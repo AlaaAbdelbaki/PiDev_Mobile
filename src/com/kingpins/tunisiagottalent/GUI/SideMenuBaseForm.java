@@ -34,6 +34,8 @@ import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
 import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
+import com.kingpins.tunisiagottalent.Entity.User;
+import com.kingpins.tunisiagottalent.Services.UserServices;
 
 
 /**
@@ -70,7 +72,18 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME,null);
         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> {
             try {
-                new ProfileForm(res).show();
+                new ProfileForm(res,UserSession.instance.getU()).show();
+                //FOR TESTING ONLY DELETE LATERS
+//                UserServices us = new UserServices();
+//                User u = us.getUser(1);
+//                new ProfileForm(res,u).show();
+                //FOR TESTING ONLY DELETE LATERS
+            } catch (IOException ex) {
+            }
+        });
+        getToolbar().addMaterialCommandToSideMenu("  Search", FontImage.MATERIAL_SEARCH,e->{
+            try {
+                new SearchForm(res).show();
             } catch (IOException ex) {
             }
         });

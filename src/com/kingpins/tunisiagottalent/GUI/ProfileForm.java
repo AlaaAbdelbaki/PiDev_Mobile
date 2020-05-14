@@ -62,25 +62,26 @@ public class ProfileForm extends SideMenuBaseForm {
 
     UserServices us = new UserServices();
 //    Profile elements
-    User user = us.getUser(UserSession.instance.getU().getId());
+//    User user = us.getUser(UserSession.instance.getU().getId());
     EncodedImage enc;
     Image profilePic;
     ImageViewer imgv;
-    String linkProfilePic = "http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic();
-//    String linkProfilePic = "http://192.168.1.8:8000/assets/uploads/" + user.getProfilePic();
-//    String linkProfilePic = "http://192.168.34.17:8000/assets/uploads/" + user.getProfilePic();
-    Label username = new Label(user.getUsername());
-    Label name = new Label(user.getName());
-    Label lastName = new Label(user.getLastName());
+
+    Label username = new Label("username");
+    Label name = new Label("name");
+    Label lastName = new Label("lastName");
+    Label subCount = new Label("SubCount");
+    Label subscribedToCount = new Label("subscribedToCount");
     SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyy");
 
-    Label birthday = new Label(sdf1.format(user.getBirthday()));
-    Label bio = new Label(user.getBio());
+    Label birthday = new Label("bday");
+    Label bio = new Label("bio");
     Button updateProfile = new Button("Update your profile");
 //    Button addVideo = new Button("Add video");
     Button admin = new Button("Admin");
     Button talent = new Button("Talent");
     Button regular = new Button("Simple User");
+    Button subscribe = new Button("Subscribe");
     Picker sort = new Picker();
     Form current = this;
 
@@ -95,10 +96,13 @@ public class ProfileForm extends SideMenuBaseForm {
     Container profileFeedContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
     Container sortContainer = new Container(new FlowLayout(CENTER, CENTER));
     Container footer = new Container(new FlowLayout(CENTER, CENTER));
+    Container subInfo = new Container(new FlowLayout(CENTER, CENTER));
+    Container subButton = new Container(new FlowLayout(CENTER, CENTER));
+    Container subscribtion = new Container(new BoxLayout(BoxLayout.Y_AXIS));
     FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
 
 //    Final form
-    public ProfileForm(Resources res) throws IOException {
+    public ProfileForm(Resources res, User user) throws IOException {
         super(BoxLayout.y());
 
         Toolbar tb = getToolbar();
@@ -111,8 +115,40 @@ public class ProfileForm extends SideMenuBaseForm {
         setupSideMenu(res);
 //        Tests
         System.out.println("entered profile");
-        System.out.println(user.getBirthday());
+//        System.out.println(user.getBirthday());
 //        Init
+
+        //labels init
+        username.setText(user.getUsername());
+        name.setText(user.getName());
+        lastName.setText(user.getLastName());
+        birthday.setText(sdf1.format(user.getBirthday()));
+        bio.setText(user.getBio());
+        subCount.setText("Subscribers: " + Integer.toString(us.getSubcount(user.getId()).get(1)));
+        subscribedToCount.setText("Subscribed to: " + Integer.toString(us.getSubcount(user.getId()).get(0)));
+        //labels init end
+
+        //if profile
+        subscribe.setVisible(false);
+        if (!user.getUsername().equals(UserSession.instance.getU().getUsername())) {
+            updateProfile.setVisible(false);
+            //if not subscribed
+            subscribe.setVisible(true);
+            if (!us.isSubscribed(user.getId(), UserSession.instance.getU().getId())) {
+                subscribe.setText("Subscribe");
+                subButton.revalidate();
+
+            } //if subscribed
+            else {
+                subscribe.setText("Unsubscribe");
+                subButton.revalidate();
+            }
+        }
+
+        //Profile picture mask init
+        String linkProfilePic = "http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic();
+//        String linkProfilePic = "http://192.168.1.8:8000/assets/uploads/" + user.getProfilePic();
+//        String linkProfilePic = "http://192.168.34.17:8000/assets/uploads/" + user.getProfilePic();
         enc = EncodedImage.create("/load.png");
         Image roundMask = Image.createImage(enc.getWidth(), enc.getHeight(), 0xff000000);
         Graphics gr = roundMask.getGraphics();
@@ -124,6 +160,8 @@ public class ProfileForm extends SideMenuBaseForm {
         Object mask = roundMask.createMask();
         profilePic = profilePic.applyMask(mask);
         imgv.setImage(profilePic);
+        //Profile picture mask init ends
+
         if (user.getRole().contains("ROLE_TALENTED")) {
 
             fab.setTextPosition(BOTTOM);
@@ -191,6 +229,11 @@ public class ProfileForm extends SideMenuBaseForm {
         sort.setSelectedString("Oldest videos");
         sort.getStyle().setFgColor(0);
 //        Adding profile elements to containers
+        subInfo.add(subCount);
+        subInfo.add(subscribedToCount);
+        subButton.add(subscribe);
+        subscribtion.add(subInfo);
+        subscribtion.add(subButton);
         sortContainer.add(new Label("Sort videos"));
         sortContainer.add(sort);
         profilePicContainer.add(imgv);
@@ -203,8 +246,9 @@ public class ProfileForm extends SideMenuBaseForm {
 //        userDetailsButtons.add(addVideo);
         userDetails.add(userDetailsButtons);
         profileFeedContainer.add(userDetails);
+        profileFeedContainer.add(subscribtion);
         profileFeedContainer.add(sortContainer);
-        profileFeedContainer.add(loadVideos());
+        profileFeedContainer.add(loadVideos(user));
         footer.add(new Label("                       "));
         profileFeedContainer.add(footer);
         if (count < 5) {
@@ -229,7 +273,7 @@ public class ProfileForm extends SideMenuBaseForm {
 //        profileFeedContainer.setScrollableX(true);
 
 //        Adding containers to the form
-        System.out.println(user.getRole());
+//        System.out.println(user.getRole());
         if (user.getRole().contains("ROLE_ADMIN")) {
             statusContainer.add(admin);
         } else if (user.getRole().contains("ROLE_TALENTED")) {
@@ -296,6 +340,38 @@ public class ProfileForm extends SideMenuBaseForm {
                 alert.showDialog();
             }
         });
+        subscribe.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+//                System.out.println(subscribe.getText());
+                int subCountValue;
+                subCountValue = us.getSubcount(user.getId()).get(1);
+                System.out.println("Subcount= "+subCountValue);
+                if (subscribe.getText().equals("SUBSCRIBE")) {
+                    if (us.subscribe(user.getId(), UserSession.instance.getU().getId())) {
+                        subCountValue++;
+                        subCount.setText("Subscribers: " + subCountValue);
+                        subscribe.setText("UNSUBSCRIBE");
+                        subInfo.revalidate();
+                        subButton.revalidate();
+                        System.out.println("changed to unsub");
+                        return;
+                    }
+
+                }
+                subCountValue = us.getSubcount(user.getId()).get(1);
+                if (subscribe.getText().equals("UNSUBSCRIBE")) {
+                    if (us.unSubscribe(user.getId(), UserSession.instance.getU().getId())) {
+                        subCountValue--;
+                        subCount.setText("Subscribers: " + subCountValue);
+                        subscribe.setText("SUBSCRIBE");
+                        subInfo.revalidate();
+                        subButton.revalidate();
+                        System.out.println("changed to sub");
+                    }
+                }
+            }
+        });
 //        sort.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent evt) {
@@ -308,7 +384,7 @@ public class ProfileForm extends SideMenuBaseForm {
     }
 //
 
-    Container loadVideos() throws IOException {
+    Container loadVideos(User user) throws IOException {
         Container videos = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         Display display = Display.getInstance();
         int videoWidth = (int) ((double) display.getDisplayWidth());
@@ -387,5 +463,4 @@ public class ProfileForm extends SideMenuBaseForm {
 //
 //        return videos2;
 //    }
-
 }

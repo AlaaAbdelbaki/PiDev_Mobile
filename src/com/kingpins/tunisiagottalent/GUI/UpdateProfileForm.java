@@ -170,7 +170,7 @@ public class UpdateProfileForm extends Form {
             public void actionPerformed(ActionEvent evt) {
                 MultipartRequest cr = new MultipartRequest();
                 String filePath = Capture.capturePhoto(Display.getInstance().getDisplayWidth(), -1);
-                cr.setUrl(Statics.BASE_URL + "/upload=" + UserSession.instance.getU().getId());
+                cr.setUrl(Statics.BASE_URL + "/uploadImage=" + UserSession.instance.getU().getId());
                 cr.setPost(true);
                 String mime = "image/jpeg";
                 try {
@@ -274,7 +274,7 @@ public class UpdateProfileForm extends Form {
                 if (us.updateUser(user)) {
 
                     try {
-                        new ProfileForm(res).show();
+                        new ProfileForm(res,UserSession.instance.getU()).show();
                     } catch (IOException ex) {
                     }
                 }
