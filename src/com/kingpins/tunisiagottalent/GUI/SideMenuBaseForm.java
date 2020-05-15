@@ -71,7 +71,9 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, e -> showOtherForm(res));
          getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT, e -> showOtherForm(res));
+        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT, e -> {
+            new EventListForm(res).show();
+        });
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {
             try {
                 new CompetitionsForm(res).show();
