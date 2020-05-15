@@ -14,6 +14,8 @@
     <image name="text-field-underline.png"  />
     <theme name="Theme">
         <val key="@includeNativeBool" value="true" />
+        <val key="CenterIcon.align" value="4" />
+        <val key="CenterIcon.transparency" value="0" />
         <gradient key="CompForm.bgGradient" color1="19605" color2="14949450" posX="0.51" posY="0.51" radius="1.0" />
         <val key="CompForm.bgType" value="7" />
         <val key="CompForm.margin" value="0.0,0.0,0.0,0.0" />
@@ -66,6 +68,9 @@
         <val key="LoginButton.sel#padding" value="2.0,2.0,2.0,2.0" />
         <val key="LoginButton.sel#transparency" value="255" />
         <val key="LoginButton.transparency" value="255" />
+        <gradient key="PopupDialog.bgGradient" color1="10027161" color2="153" posX="0.5" posY="0.58" radius="1.1" />
+        <val key="PopupDialog.bgType" value="7" />
+        <border key="PopupDialog.border" type="roundRect" strokeColor="16777215" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10.0" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" topOnlyMode="false" bottomOnlyMode="false" cornerRadius="2.0" bezierCorners="false" />
         <val key="ProfilePic.align" value="4" />
         <val key="ProfilePic.padUnit" value="2,2,2,2" />
         <val key="ProfilePic.padding" value="3.0,3.0,3.0,3.0" />
@@ -109,6 +114,18 @@
         <val key="SidemenuTop.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SidemenuTop.padUnit" value="2,2,2,2" />
         <val key="SidemenuTop.padding" value="20.0,2.0,2.0,2.0" />
+        <val key="Splash.bgColor" value="ffffff" />
+        <val key="Splash.bgImage" value="breadcumb2.jpg" />
+        <val key="Splash.bgType" value="33" />
+        <val key="Splash.transparency" value="255" />
+        <val key="SplashSubTitle.align" value="4" />
+        <val key="SplashSubTitle.fgColor" value="ffffff" />
+        <font key="SplashSubTitle.font" type="ttf" face="0" style="0" size="0" name="native:ItalicRegular" family="native:ItalicRegular" sizeSettings="1" actualSize="12.0" />
+        <val key="SplashSubTitle.transparency" value="0" />
+        <val key="SplashTitle.align" value="4" />
+        <val key="SplashTitle.fgColor" value="ffffff" />
+        <font key="SplashTitle.font" type="ttf" face="0" style="0" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="10.0" />
+        <val key="SplashTitle.transparency" value="0" />
         <val key="StatusBarSideMenu.margin" value="0.0,0.0,0.0,0.0" />
         <val key="StatusBarSideMenu.padding" value="0.0,0.0,0.0,0.0" />
         <val key="StatusBarSideMenu.transparency" value="0" />

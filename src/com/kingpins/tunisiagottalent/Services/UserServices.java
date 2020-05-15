@@ -8,11 +8,13 @@ package com.kingpins.tunisiagottalent.Services;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
+import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.l10n.DateFormat;
 import com.codename1.l10n.DateFormatPatterns;
 import com.codename1.l10n.ParseException;
 import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.ui.events.ActionListener;
 
 import com.kingpins.tunisiagottalent.Entity.User;
 import com.kingpins.tunisiagottalent.Utils.Statics;
@@ -110,5 +112,30 @@ public class UserServices {
 
         return u;
     }
+ public boolean RegisterAction(String username,String email ,String password) {
 
+        // création d'une nouvelle demande de connexion
+        String url = Statics.BASE_URL + "/Register/" + "?email=" + email + "&username=" + username+"&password="+password;
+        con.setUrl(url);// Insertion de l'URL de notre demande de connexion
+
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+               result = con.getResponseCode() == 200;
+            
+            if (result) {
+                
+                    
+                    String str = new String(con.getResponseData());//Récupération de la réponse du serveur
+                     System.out.println(str);//Affichage de la réponse serveur sur la console
+             
+
+                
+            }
+            }
+        });
+            
+        NetworkManager.getInstance().addToQueueAndWait(con);// Ajout de notre demande de connexion à la file d'attente du NetworkManager
+        return result;
+    }
 }

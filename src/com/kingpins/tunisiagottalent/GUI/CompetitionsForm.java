@@ -60,15 +60,8 @@ public class CompetitionsForm extends SideMenuBaseForm {
     long d, h, m, s;
     Date t1 = new Date(System.currentTimeMillis());
     CompetitionsServices cs = CompetitionsServices.getInstance();
-
     public CompetitionsForm(Resources res) throws IOException {
         super( BoxLayout.y());
-       /* Toolbar tb = getToolbar();
-        tb.setTitleCentered(false);
-        Button menuButton = new Button("");
-        menuButton.setUIID("Title");
-        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-        menuButton.addActionListener(e -> getToolbar().openSideMenu());*/
         setScrollableY(false);
         Container everything=new Container(BoxLayout.y()){
             @Override
@@ -84,17 +77,9 @@ public class CompetitionsForm extends SideMenuBaseForm {
         breadcumb.setImage(im1);
         breadcumb.setImageInitialPosition(IMAGE_FILL);
         breadcumb.getAllStyles().stripMarginAndPadding();
-        
         setUIID("CompForm");
-       /* Label w = new Label("Upgrade your Account To Talented");
-        w.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE));
-        w.getAllStyles().setAlignment(CENTER);
-        w.getAllStyles().setMarginTop(10);
-        w.getAllStyles().setFgColor(0X399E5A);*/
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         Tabs t = new Tabs();
-
         Map<Competition, Label> timers = new HashMap<>();
         for (Competition comp : cs.CompetitionsList()) {
             SpanLabel l1 = new SpanLabel("From: \n" + sdf.format(comp.getCompetition_date()));
@@ -114,7 +99,6 @@ public class CompetitionsForm extends SideMenuBaseForm {
             Details.setUIID("LoginButton");
             Participate.getAllStyles().setBgColor(0x246A73);
             Participate.addActionListener(e -> {
-
                 if (UserSession.instance.getU().getRole().contains("ROLE_TALENTED")) {
                     Dialog d1Dialog = new Dialog();
                     Container userContainer = new Container(BoxLayout.yCenter());
@@ -173,7 +157,6 @@ public class CompetitionsForm extends SideMenuBaseForm {
             } else {
                 timers.put(comp, timerLabel);
             }
-
             Container all = new Container(BoxLayout.yCenter());
             Container top = new Container(BoxLayout.yCenter());
              if (DateUtil.compare(comp.getCompetition_end_date(), t1) == -1) {
@@ -200,20 +183,13 @@ public class CompetitionsForm extends SideMenuBaseForm {
                 }
             }
             all.addAll(timerLabel, cdates, l3, Details, Participate, top);
-
             t.addTab("", all);
-
         }
-        
-   
         everything.addAll(t);
         everything.getAllStyles().setMarginTop(30);
         addAll(breadcumb,everything);
-
         setupSideMenu(res);
-
         registerAnimated(this);
-
         UITimer uit = new UITimer(() -> {
             for (Map.Entry<Competition, Label> entry : timers.entrySet()) {
                 d = Long.parseLong(entry.getValue().getPropertyValue("maskName").toString());
@@ -226,13 +202,9 @@ public class CompetitionsForm extends SideMenuBaseForm {
                 entry.getValue().setText(twoDigits(h) + ":" + twoDigits(m) + ":" + twoDigits(s));
             }
             refreshTheme();
-
         });
-
         uit.schedule(1000, true, this);
-
     }
-
     public static String twoDigits(long v) {
         return v < 10 ? "0" + v : "" + v;
     }

@@ -30,69 +30,67 @@ import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
 import java.util.Date;
 
-
 /**
  *
  * @author Anis
  */
-public class NewParticipationForm extends Form{
+public class NewParticipationForm extends Form {
+
     String embededurl;
     CompetitionsServices cs = CompetitionsServices.getInstance();
-    public NewParticipationForm(Resources res, Competition c, Form parentForm) throws IOException {
-       super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
-     this.getAllStyles().setBgImage(res.getImage("bg-4.jpg"));
-     this.getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
+    public NewParticipationForm(Resources res, Competition c, Form parentForm) throws IOException {
+        super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
+        this.getAllStyles().setBgImage(res.getImage("bg-4.jpg"));
+        this.getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
         getToolbar().addMaterialCommandToLeftBar(
                 "",
                 FontImage.MATERIAL_ARROW_BACK,
                 (ev) -> parentForm.showBack());
-        
-        Label FormTitle=new Label("Add New Video");
+        Label FormTitle = new Label("Add New Video");
         FormTitle.getAllStyles().setAlignment(CENTER);
         TextField Title = new TextField("", "Title", 15, TextField.EMAILADDR);
-         TextField url = new TextField("", "URL", 15, TextField.EMAILADDR);
-         Label dateLabel=new Label(new Date(System.currentTimeMillis()).toString());
-         BrowserComponent browser = new BrowserComponent();
-         browser.setVisible(false);
-         url.addDataChangedListener(new DataChangedListener() {
+        TextField url = new TextField("", "URL", 15, TextField.EMAILADDR);
+        Label dateLabel = new Label(new Date(System.currentTimeMillis()).toString());
+        BrowserComponent browser = new BrowserComponent();
+        browser.setVisible(false);
+        url.addDataChangedListener(new DataChangedListener() {
             @Override
             public void dataChanged(int type, int index) {
-                if (!url.getText().isEmpty()){
-         embededurl = "https://www.youtube.com/embed/";
-        String code = url.getText().substring(url.getText().length() - 11);
-        embededurl = embededurl + code;
-               browser.setURL(embededurl);
-                browser.setVisible(true);}
+                if (!url.getText().isEmpty()) {
+                    embededurl = "https://www.youtube.com/embed/";
+                    String code = url.getText().substring(url.getText().length() - 11);
+                    embededurl = embededurl + code;
+                    browser.setURL(embededurl);
+                    browser.setVisible(true);
+                }
             }
         });
-         Button Postvideo=new Button("Post Video");
-         Postvideo.setUIID("LoginButton");
-         Postvideo.addActionListener(e -> {
-          if ((url.getText().length() == 0) || (Title.getText().length() == 0)) {
+        Button Postvideo = new Button("Post Video");
+        Postvideo.setUIID("LoginButton");
+        Postvideo.addActionListener(e -> {
+            if ((url.getText().length() == 0) || (Title.getText().length() == 0)) {
                 Dialog.show("Alert", "Please fill all fields", new Command("OK"));
             } else {
-          video v =new video(embededurl, Title.getText(), new Date(System.currentTimeMillis()), UserSession.instance.getU());
-              competition_participant cp=new competition_participant(c, UserSession.instance.getU(), new Date(System.currentTimeMillis()), v);
-              cs.participate(v,cp);
-            /*  try {
-                  new CompetitionParticipationsForm(res,c,new CompetitionsForm(res)).show();
-              } catch (IOException ex) {
-                  
-              }*/
-          }
-             
-         });
-         Container labels=new Container(BoxLayout.yCenter()).addAll(Title,
-                url,dateLabel);
-         Container by = new Container( new GridLayout(2, 1));
-                by.addAll(
+                video v = new video(embededurl, Title.getText(), new Date(System.currentTimeMillis()), UserSession.instance.getU());
+                competition_participant cp = new competition_participant(c, UserSession.instance.getU(), new Date(System.currentTimeMillis()), v);
+                cs.participate(v, cp);
+                try {
+                    new CompetitionParticipationsForm(res, c, new CompetitionsForm(res)).show();
+                } catch (IOException ex) {
+
+                }
+            }
+        });
+        Container labels = new Container(BoxLayout.yCenter()).addAll(Title,
+                url, dateLabel);
+        Container by = new Container(new GridLayout(2, 1));
+        by.addAll(
                 labels,
                 browser
-                
         );
-         add( BorderLayout.NORTH,FormTitle);
-        add(BorderLayout.CENTER,by);
-        add(BorderLayout.SOUTH,Postvideo);
+        add(BorderLayout.NORTH, FormTitle);
+        add(BorderLayout.CENTER, by);
+        add(BorderLayout.SOUTH, Postvideo);
     }
 }
