@@ -8,12 +8,7 @@ package com.kingpins.tunisiagottalent.GUI;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.ShareButton;
 import com.codename1.components.SpanLabel;
-import com.codename1.io.FileSystemStorage;
-import com.codename1.io.Log;
-import com.codename1.io.MultipartRequest;
-import com.codename1.io.NetworkManager;
-import com.codename1.io.Storage;
-import com.codename1.ui.BrowserWindow;
+
 
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
@@ -23,29 +18,29 @@ import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 
 import com.codename1.ui.Image;
-import com.codename1.ui.Label;
 
-import com.codename1.ui.TextArea;
+
+
 import com.codename1.ui.Toolbar;
 
 import com.codename1.ui.URLImage;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
-import com.codename1.ui.layouts.BorderLayout;
+
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Border;
-import com.codename1.ui.plaf.Style;
-import com.codename1.ui.plaf.UIManager;
-import com.codename1.ui.util.ImageIO;
+
 import com.codename1.ui.util.Resources;
 
 import com.kingpins.tunisiagottalent.Entity.Event;
 import com.kingpins.tunisiagottalent.Services.EventServices;
 import java.io.IOException;
-import java.io.OutputStream;
+
 
 import java.util.ArrayList;
-import java.util.Random;
+
+import com.codename1.messaging.Message;
+import com.codename1.ui.Display;
+import com.kingpins.tunisiagottalent.Utils.UserSession;
+
 
 /**
  *
@@ -112,7 +107,7 @@ public class EventListForm extends SideMenuBaseForm {
                 c2.add(im4);
                 c2.add(new SpanLabel(r.getLocation()));
                 c3.add(c2);
-                SpanLabel l1= new SpanLabel("NbPlaces:" + r.getNb_places());
+                SpanLabel l1 = new SpanLabel("NbPlaces:" + r.getNb_places());
                 c3.add(l1);
                 c3.add(c4);
 
@@ -130,9 +125,13 @@ public class EventListForm extends SideMenuBaseForm {
                 bparticiper.addActionListener(e -> {
                     if (r.getNb_places() > 0) {
                         EventServices.getInstance().participer(r);
+                        // l1.remove();
                         refreshTheme();
+
+                        // l1.repaint();
+                        //l1.revalidate();
                         bticket.setEnabled(true);
-                       // l1.repaint();
+
                         Dialog.show("", "You have participated successfully !!! ", new Command("OK"));
 
                     } else {
@@ -141,33 +140,13 @@ public class EventListForm extends SideMenuBaseForm {
                     }
 
                 });
+                String i = UserSession.instance.getU().getEmail();
 
                 bticket.addActionListener(e -> {
 
-                    Dialog d = new Dialog("ticket");
-
-                    TextArea popupBody = new TextArea("");
-                    Dialog.setDefaultBlurBackgroundRadius(8);
-                    popupBody.setEditable(false);
-
-                    Button b = new Button("get your Ticket from the website");
-                    b.addActionListener(ev -> {
-                        BrowserWindow win = new BrowserWindow("http://127.0.0.1:8000/events/list");
-                        //http://127.0.0.1:8000/event/reservation/185
-                        win.addCloseListener(evt -> {
-                            System.out.println("Browser was closed");
-                        });
-                        win.addLoadListener(evt -> {
-                            System.out.println("Loaded page " + evt.getSource());
-                        });
-                        win.setTitle("Get Ticket");
-                        win.show();
-                    });
-
-                    d.setLayout(new BorderLayout());
-                    d.add(BorderLayout.CENTER, popupBody);
-                    d.add(BorderLayout.CENTER, b);
-                    d.showPopupDialog(bticket);
+                    String url = "http://127.0.0.1:8000/event/reservation/" + r.getId();
+                    Message m1 = new Message(url);
+                    Display.getInstance().sendMessage(new String[]{i}, "Get your ticket", m1);
 
                 });
             }
