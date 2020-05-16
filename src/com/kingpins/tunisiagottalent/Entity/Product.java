@@ -17,7 +17,22 @@ public class Product {
     private int stock;
     private double price;
     private int quantity=1;
+    private int bought=0;
 
+    
+    public Product(){
+        
+    }
+    
+    public Product(int id,String product_name,String img,int stock,double price,int quantity,int bought){
+        this.id=id;
+        this.product_name=product_name;
+        this.img=img;
+        this.stock=stock;
+        this.price=price;
+        this.quantity=quantity;
+        this.bought=bought;
+    }
     
     public Product(int id,String product_name,String img,int stock,double price,int quantity){
         this.id=id;
@@ -53,6 +68,19 @@ public class Product {
         this.stock=stock;
         this.price=price;
     }
+    
+    public Product(int id,int quantity){
+        this.id=id;
+        this.quantity=quantity;
+    }
+    
+    public Product(String product_name){
+        this.product_name=product_name;
+    }
+    public Product(String product_name,int quantity){
+        this.product_name=product_name;
+        this.quantity=quantity;
+    }
 
     public Product(Product cart) {
        
@@ -78,6 +106,11 @@ public class Product {
     public double getPrice() {
         return price;
     }
+
+    public int getBought() {
+        return bought;
+    }
+    
 
 
     public void setId(int id) {
@@ -108,10 +141,19 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public void setBought(int bought) {
+        this.bought = bought;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", product_name=" + product_name + ", img=" + img + ", stock=" + stock + ", price=" + price + ", quantity=" + quantity + '}';
+        return "Product{" + "id=" + id + ", product_name=" + product_name + ", img=" + img + ", stock=" + stock + ", price=" + price + ", quantity=" + quantity + ", bought=" + bought + '}';
     }
+    
+    
+    
+
+
 
 
     

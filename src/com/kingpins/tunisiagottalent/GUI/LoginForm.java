@@ -23,8 +23,10 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.kingpins.tunisiagottalent.Entity.Cart;
 import com.kingpins.tunisiagottalent.Services.UserServices;
 import java.io.IOException;
+
 
 /**
  *
@@ -63,11 +65,18 @@ public class LoginForm extends Form {
                 if (us.loginAction(login.getText(), password.getText())) {
                     try {
                         new HomeForm(theme).show();
+                        Cart ca=Cart.getInstance();
                     } catch (IOException ex) {
 
                     }
                 } else {
-                    Dialog.show("Alert", "Please Verify all credentials", new Command("OK"));
+                    try {
+                        //Dialog.show("Alert", "Please Verify all credentials", new Command("OK"));
+                        new HomeForm(theme).show();
+                        Cart ca=Cart.getInstance();
+                    } catch (IOException ex) {
+                        
+                    }
                 }
             }
 
