@@ -62,12 +62,12 @@ public abstract class SideMenuBaseForm extends Form {
     }
 
     public void setupSideMenu(Resources res) throws IOException {
-                Toolbar tb = getToolbar();
+         /*       Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
         Button menuButton = new Button("");
         menuButton.setUIID("Title");
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-        menuButton.addActionListener(e -> getToolbar().openSideMenu());
+        menuButton.addActionListener(e -> getToolbar().openSideMenu());*/
         Image logo = res.getImage("logo.png");
       
         ImageViewer im =new ImageViewer(logo);
@@ -76,7 +76,19 @@ public abstract class SideMenuBaseForm extends Form {
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, null );
-         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, null);
+         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> {
+            try {
+                new ProfileForm(res,UserSession.instance.getU()).show();
+            } catch (IOException ex) {
+               
+            }
+        });
+          getToolbar().addMaterialCommandToSideMenu("  Search", FontImage.MATERIAL_SEARCH,e->{
+            try {
+                new SearchForm(res).show();
+            } catch (IOException ex) {
+            }
+        });
         getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, null);
         getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT,null);
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {

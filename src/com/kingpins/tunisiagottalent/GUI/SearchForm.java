@@ -13,8 +13,11 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
+import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
@@ -37,14 +40,7 @@ public class SearchForm extends SideMenuBaseForm {
 
 //    Container content = new Container(new BoxLayout(BoxLayout.Y_AXIS));
     public SearchForm(Resources res) throws IOException {
-//        super(BoxLayout.y());
-//        Toolbar tb = getToolbar();
-//        tb.setTitleCentered(false);
-//        Button menuButton = new Button("");
-//        menuButton.setUIID("Title");
-//        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-//        menuButton.addActionListener(e -> getToolbar().openSideMenu());
-//        
+        setUIID("ProfileForm");
 
 //Init
         this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
@@ -66,19 +62,21 @@ public class SearchForm extends SideMenuBaseForm {
                 removeAll();
                 for (User u : userList) {
                     MultiButton m = new MultiButton();
-                    System.out.println(u.getUsername());
+                    String linkProfilePic = "http://127.0.0.1:8000/assets/uploads/" + u.getProfilePic();
+            EncodedImage enc = null;
+            enc = (EncodedImage) res.getImage("round-mask.png");
+            Image roundMask = Image.createImage(enc.getWidth() / 2, enc.getHeight() / 2, 0xff000000);
+            Graphics gr = roundMask.getGraphics();
+            gr.setColor(0xffffff);
+            gr.fillArc(0, 0, enc.getWidth() / 2, enc.getWidth() / 2, 0, 360);
+            Image profilePic = URLImage.createToStorage(enc, linkProfilePic, linkProfilePic);
+            profilePic = profilePic.scaled(enc.getWidth() / 2, enc.getHeight() / 2);
+            Object mask = roundMask.createMask();
+            profilePic = profilePic.applyMask(mask);
+          //  Label UsernameLabel = new Label("   " +u.getUsername(), profilePic);
                     m.setTextLine1(u.getUsername());
-//                    m.setTextLine2(c.getPrimaryPhoneNumber());
-//                    Image pic;
-//                    try {
-//                        pic = URLImage.create("http://127.0.0.1:8000/assets/uploads/" + u.getProfilePic());
-//                        if (pic != null) {
-//                        m.setIcon(pic);
-//                    } else {
-//                        m.setIcon(finalDuke);
-//                    }
-//                    } catch (IOException ex) {
-//                    }
+                    m.setIcon(profilePic);
+                
 //                    
                     m.addActionListener(new ActionListener() {
                         @Override
@@ -90,6 +88,7 @@ public class SearchForm extends SideMenuBaseForm {
                         }
                     });
                     add(m);
+                    m.setVisible(false);
                 }
                 revalidate();
             });
@@ -101,7 +100,7 @@ public class SearchForm extends SideMenuBaseForm {
                 // clear search
                 for (Component cmp : getContentPane()) {
                     cmp.setHidden(false);
-                    cmp.setVisible(true);
+                    cmp.setVisible(false);
                 }
                 getContentPane().animateLayout(150);
             } else {

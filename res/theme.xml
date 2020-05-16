@@ -38,6 +38,9 @@
         <val key="CreateNewAccountButton.sel#margin" value="4.0,0.0,0.0,0.0" />
         <val key="CreateNewAccountButton.sel#transparency" value="0" />
         <val key="CreateNewAccountButton.transparency" value="0" />
+        <gradient key="Dialog.bgGradient" color1="16711680" color2="255" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="Dialog.bgType" value="7" />
+        <border key="Dialog.border" type="empty" />
         <val key="Label.fgColor" value="ffffff" />
         <font key="Label.font" type="ttf" face="0" style="1" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="3.5" />
         <val key="Label.transparency" value="0" />
@@ -51,8 +54,8 @@
         <val key="LoginButton.padding" value="2.0,2.0,2.0,2.0" />
         <val key="LoginButton.press#align" value="4" />
         <val key="LoginButton.press#bgColor" value="cc66ff" />
-        <val key="LoginButton.press#fgColor" value="cccccc" />
-        <font key="LoginButton.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
+        <val key="LoginButton.press#fgColor" value="ff" />
+        <font key="LoginButton.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.0" />
         <val key="LoginButton.press#marUnit" value="2,2,2,2" />
         <val key="LoginButton.press#margin" value="3.0,3.0,1.0,1.0" />
         <val key="LoginButton.press#padUnit" value="2,2,2,2" />
@@ -71,6 +74,10 @@
         <gradient key="PopupDialog.bgGradient" color1="10027161" color2="153" posX="0.5" posY="0.58" radius="1.1" />
         <val key="PopupDialog.bgType" value="7" />
         <border key="PopupDialog.border" type="roundRect" strokeColor="16777215" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10.0" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" topOnlyMode="false" bottomOnlyMode="false" cornerRadius="2.0" bezierCorners="false" />
+        <gradient key="ProfileForm.bgGradient" color1="6711039" color2="51" posX="0.5" posY="0.6" radius="0.8" />
+        <val key="ProfileForm.bgType" value="6" />
+        <val key="ProfileForm.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="ProfileForm.padding" value="0.0,0.0,0.0,0.0" />
         <val key="ProfilePic.align" value="4" />
         <val key="ProfilePic.padUnit" value="2,2,2,2" />
         <val key="ProfilePic.padding" value="3.0,3.0,3.0,3.0" />

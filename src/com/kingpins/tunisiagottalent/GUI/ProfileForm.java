@@ -75,12 +75,13 @@ public class ProfileForm extends SideMenuBaseForm {
     SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyy");
 
     Label birthday = new Label("bday");
-    Label bio = new Label("bio");
-    Button updateProfile = new Button("Update your profile");
+    SpanLabel bio = new SpanLabel("bio");
+    Button updateProfile = new Button("Update your profile","LoginButton");
 //    Button addVideo = new Button("Add video");
-    Button admin = new Button("Admin");
-    Button talent = new Button("Talent");
-    Button regular = new Button("Simple User");
+    Button admin = new Button("Admin","LoginButton");
+    
+    Button talent = new Button("Talent","LoginButton");
+    Button regular = new Button("Simple User","LoginButton");
     Button subscribe = new Button("Subscribe");
     Picker sort = new Picker();
     Form current = this;
@@ -104,19 +105,17 @@ public class ProfileForm extends SideMenuBaseForm {
 //    Final form
     public ProfileForm(Resources res, User user) throws IOException {
         super(BoxLayout.y());
+        setUIID("ProfileForm");
+        updateProfile.getAllStyles().setBgColor(0xF36B08);
 
-        Toolbar tb = getToolbar();
-        tb.setTitleCentered(false);
-        Button menuButton = new Button("");
-        menuButton.setUIID("Title");
-        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-        menuButton.addActionListener(e -> getToolbar().openSideMenu());
+admin.getAllStyles().setBgColor(0xff0000);
+FontImage.setMaterialIcon(admin, FontImage.MATERIAL_BUILD, 3);
 
-        setupSideMenu(res);
-//        Tests
-        System.out.println("entered profile");
-//        System.out.println(user.getBirthday());
-//        Init
+talent.getAllStyles().setBgColor(0x32CD32);
+FontImage.setMaterialIcon(talent, FontImage.MATERIAL_FAVORITE, 3);
+
+regular.getAllStyles().setBgColor(0xF36B08);
+FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
 
         //labels init
         username.setText(user.getUsername());
@@ -145,11 +144,9 @@ public class ProfileForm extends SideMenuBaseForm {
             }
         }
 
-        //Profile picture mask init
+       //Profile picture mask init
         String linkProfilePic = "http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic();
-//        String linkProfilePic = "http://192.168.1.8:8000/assets/uploads/" + user.getProfilePic();
-//        String linkProfilePic = "http://192.168.34.17:8000/assets/uploads/" + user.getProfilePic();
-        enc = EncodedImage.create("/load.png");
+        enc = (EncodedImage) res.getImage("round-mask.png");
         Image roundMask = Image.createImage(enc.getWidth(), enc.getHeight(), 0xff000000);
         Graphics gr = roundMask.getGraphics();
         gr.setColor(0xffffff);
@@ -177,7 +174,7 @@ public class ProfileForm extends SideMenuBaseForm {
                     TextField urlInput = new TextField();
                     titleInput.getStyle().setFgColor(0);
                     urlInput.getStyle().setFgColor(0);
-                    Button submit = new Button("Submit");
+                    Button submit = new Button("Submit","LoginButton");
                     BrowserComponent browser = new BrowserComponent();
                     int videoWidth = addVideo.getWidth();
                     browser.setPreferredH((videoWidth * 9) / 16);
@@ -217,7 +214,7 @@ public class ProfileForm extends SideMenuBaseForm {
                     addVideo.add(preview);
                     addVideo.add(submit);
 
-                    addVideo.show();
+                    addVideo.showPopupDialog(fab);
 
                 }
             });
@@ -392,11 +389,12 @@ public class ProfileForm extends SideMenuBaseForm {
                 
             }
         });
+        setupSideMenu(res);
     }
 //
 
     Container loadVideos(User user) throws IOException {
-        setUIID("loadedVideos");
+     //   setUIID("loadedVideos");
         Container videos = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         Display display = Display.getInstance();
         int videoWidth = (int) ((double) display.getDisplayWidth());

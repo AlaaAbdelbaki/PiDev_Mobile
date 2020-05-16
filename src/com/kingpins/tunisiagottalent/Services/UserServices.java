@@ -145,7 +145,7 @@ public class UserServices {
         });
             
         NetworkManager.getInstance().addToQueueAndWait(con);// Ajout de notre demande de connexion à la file d'attente du NetworkManager
-        return result;
+        return result;}
     public boolean updateUser(User user) {
         String url = Statics.BASE_URL
                 + "/updateUser?"

@@ -77,9 +77,9 @@ public class UpdateProfileForm extends Form {
     TextField passwordInput = new TextField(TextField.PASSWORD);
     TextField passwordConfirmationInput = new TextField(TextField.PASSWORD);
     Button deleteAccount = new Button("Delete Account");
-    Button submit = new Button("Submit");
-    Button uploadPic = new Button("Upload profile picture");
-    Button takePic = new Button("Take a picture");
+    Button submit = new Button("Submit","LoginButton");
+    Button uploadPic = new Button("Upload profile picture","LoginButton");
+    Button takePic = new Button("Take a picture","LoginButton");
     ImageViewer imgv;
     
     
@@ -118,7 +118,7 @@ public class UpdateProfileForm extends Form {
 
     public UpdateProfileForm(Resources res, Form parentForm) throws IOException {
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, ev -> parentForm.showBack());
-        //Init
+        setUIID("ProfileForm");
         loadInfo();
         buttons.add(deleteAccount);
         buttons.add(submit);
