@@ -37,7 +37,7 @@ public class ProductChartForm extends Form {
          
          
          super(BoxLayout.y());
-         
+          setUIID("CompForm");
          ArrayList<Product> testarray = new ArrayList<>();
          
          getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());

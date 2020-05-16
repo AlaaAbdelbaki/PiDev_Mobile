@@ -36,15 +36,16 @@ import java.util.ArrayList;
  *
  * @author paspo
  */
-public class ShopForm extends Form{
+public class ShopForm extends SideMenuBaseForm{
     Form current;
     int test = 0;
     
     public ShopForm(Resources theme) throws IOException{
        // new HomeForm(theme).show();
-
+       
        super(BoxLayout.y());
- 
+ setUIID("CompForm");
+ setupSideMenu(theme);
         current=this;
         Button showShoppingCart = new Button("Cart");
         FontImage.setMaterialIcon(showShoppingCart, FontImage.MATERIAL_SHOPPING_BASKET, 3);

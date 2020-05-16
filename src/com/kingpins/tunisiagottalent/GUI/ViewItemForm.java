@@ -28,6 +28,7 @@ public class ViewItemForm extends Form{
     
     public ViewItemForm(Form previous,Product p) throws IOException{
         super(BoxLayout.y());
+        setUIID("CompForm");
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
         
          Container cnt1 = new Container(new LayeredLayout());

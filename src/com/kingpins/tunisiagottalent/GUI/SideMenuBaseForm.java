@@ -78,7 +78,12 @@ public abstract class SideMenuBaseForm extends Form {
         sidemenuTop.setUIID("SidemenuTop");
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, null );
+        getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, e->{
+            try {
+                new HomeForm(res).show();
+            } catch (IOException ex) {
+            }
+        });
          getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> {
             try {
                 new ProfileForm(res,UserSession.instance.getU()).show();
@@ -92,7 +97,13 @@ public abstract class SideMenuBaseForm extends Form {
             } catch (IOException ex) {
             }
         });
-        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP, null);
+        getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP,  e -> {
+            try {
+                new ShopForm(res).show();
+            } catch (IOException ex) {
+               
+            }
+        });
         getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT,null);
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {
             try {

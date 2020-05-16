@@ -38,12 +38,16 @@ import java.util.ArrayList;
  */
 public class ShoppingCartForm extends Form{
     Form form;
-    
+     Button order = new Button("Order Now ");
+     Label straightline = new Label("________________________________________________________________");
+     Label totalelabel = new Label();
+     Label totaltext = new Label("Total : ");
     public ShoppingCartForm(Form previous,ArrayList<Product> cartlist) throws IOException{
                 
                 super(BoxLayout.y());
+                 setUIID("CompForm");
                 double total = 0;
-                Label totalelabel = new Label();
+                
                 getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
                 
        if(cartlist.isEmpty()){
@@ -102,9 +106,9 @@ public class ShoppingCartForm extends Form{
                 ll1.setInsets(productname, "auto auto 26mm 22mm");
                 ll1.setInsets(quantityText, "auto auto 17mm 22mm");
                 
-                ll1.setInsets(additionquantity, "auto auto 16mm 34mm");
-                ll1.setInsets(quantityValue,"auto auto 17mm 41mm");
-                ll1.setInsets(substractquantity, "auto auto 16mm 43mm");
+                ll1.setInsets(additionquantity, "auto auto 16mm 36mm");
+                ll1.setInsets(quantityValue,"auto auto 17mm 43mm");
+                ll1.setInsets(substractquantity, "auto auto 16mm 46mm");
                 
                 ll1.setInsets(priceproducttext, "auto auto 12mm 22mm");
                 ll1.setInsets(priceproductvalue, "auto auto 12mm 33mm");
@@ -146,13 +150,24 @@ public class ShoppingCartForm extends Form{
                 
                 trash.addActionListener(event -> {
                     Cart.instance.RemoveProduct(p);
-                    getCurrentForm().repaint();
+                    cnt1.removeAll();
+                    double test = Double.parseDouble(totalelabel.getText());
+                    totalelabel.setText(Double.toString(test-p.getPrice()*p.getQuantity()));
+                    if (Cart.instance.getC().isEmpty()){
+                    order.setVisible(false);
+                    straightline.setVisible(false);
+                    totalelabel.setVisible(false);
+                    totaltext.setVisible(false);
+                    Label empty = new Label("Your Cart is Empty");
+                    add(empty);
+                    
+                    }
                     getCurrentForm().refreshTheme();
-                    getCurrentForm().revalidate();
+                    
                 });
                 
             }
-            Label straightline = new Label("________________________________________________________________");
+            
             add(straightline);
             
             Container cnt2 = new Container(new LayeredLayout());
@@ -160,15 +175,15 @@ public class ShoppingCartForm extends Form{
             
             totalelabel.setText(Double.toString(total));
             cnt2.add(totalelabel);
-            Label totaltext = new Label("Total : ");
+            
             
             
             ll2.setInsets(totalelabel,"auto 0 0 auto");
-            ll2.setInsets(totaltext, "auto 0 0 43mm");
+            ll2.setInsets(totaltext, "auto 0 0 40mm");
             cnt2.add(totaltext);
             add(cnt2);
             
-            Button order = new Button("Order Now ");
+           
             order.setUIID("LoginButton");
             
             order.setPreferredSize(new Dimension(450,100));
