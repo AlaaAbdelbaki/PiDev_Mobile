@@ -33,7 +33,7 @@ public class TunisiaGotTalent {
 
     public void init(Object context) {
         // use two network threads instead of one
-        updateNetworkThreadCount(3);
+        updateNetworkThreadCount(2);
 
         theme = UIManager.initFirstTheme("/theme");
 
@@ -42,7 +42,7 @@ public class TunisiaGotTalent {
         // Pro only feature
         Log.bindCrashProtection(true);
 
-        addNetworkErrorListener(err -> {
+   /*     addNetworkErrorListener(err -> {
             // prevent the event from propagating
             err.consume();
             if (err.getError() != null) {
@@ -50,7 +50,7 @@ public class TunisiaGotTalent {
             }
             Log.sendLogAsync();
             Dialog.show("Connection Error", "There was a networking error in the connection to " + err.getConnectionRequest().getUrl(), "OK", null);
-        });
+        });*/
     }
 
     public void start() {
