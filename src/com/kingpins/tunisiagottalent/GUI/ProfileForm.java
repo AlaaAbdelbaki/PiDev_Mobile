@@ -162,7 +162,7 @@ public class ProfileForm extends SideMenuBaseForm {
         imgv.setImage(profilePic);
         //Profile picture mask init ends
 
-        if (user.getRole().contains("ROLE_TALENTED")) {
+        if (user.getRole().contains("ROLE_TALENTED") && user.getId() == UserSession.instance.getU().getId()) {
 
             fab.setTextPosition(BOTTOM);
             fab.addActionListener(new ActionListener() {
@@ -237,6 +237,7 @@ public class ProfileForm extends SideMenuBaseForm {
         sortContainer.add(new Label("Sort videos"));
         sortContainer.add(sort);
         profilePicContainer.add(imgv);
+        profilePicContainer.revalidate();
         usernameContainer.add(username);
         userDetails.add(name);
         userDetails.add(lastName);
@@ -346,7 +347,7 @@ public class ProfileForm extends SideMenuBaseForm {
 //                System.out.println(subscribe.getText());
                 int subCountValue;
                 subCountValue = us.getSubcount(user.getId()).get(1);
-                System.out.println("Subcount= "+subCountValue);
+                System.out.println("Subcount= " + subCountValue);
                 if (subscribe.getText().equals("SUBSCRIBE")) {
                     if (us.subscribe(user.getId(), UserSession.instance.getU().getId())) {
                         subCountValue++;
@@ -372,19 +373,30 @@ public class ProfileForm extends SideMenuBaseForm {
                 }
             }
         });
-//        sort.addActionListener(new ActionListener() {
+//        sort.addStateChangeListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent evt) {
+//                sort.getSelectedString();
 //                try {
-////                    loadVideos().refresh();
+//                    loadVideos(user).revalidate();
 //                } catch (IOException ex) {
 //                }
 //            }
 //        });
+        sort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                System.out.println(sort.getSelectedString());
+                
+                    //Needs to be fixed
+                
+            }
+        });
     }
 //
 
     Container loadVideos(User user) throws IOException {
+        setUIID("loadedVideos");
         Container videos = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         Display display = Display.getInstance();
         int videoWidth = (int) ((double) display.getDisplayWidth());
@@ -397,7 +409,7 @@ public class ProfileForm extends SideMenuBaseForm {
         ArrayList<video> vids = VideoServices.getInstance().getVideo(user.getId());
         System.out.println(vids.size());
 //        System.out.println(sort.getText());
-        if (sort.getText().equals("Oldest videos")) {
+        if (sort.getSelectedString().equals("Oldest videos")) {
 
             for (video v : VideoServices.getInstance().getVideo(user.getId())) {
                 //        for (int i = vids.size(); i <= 0; i--) {
@@ -432,35 +444,4 @@ public class ProfileForm extends SideMenuBaseForm {
         return videos;
     }
 
-//    InfiniteContainer loadVideos2() {
-//        InfiniteContainer videos2 = new InfiniteContainer() {
-//            @Override
-//            public Component[] fetchComponents(int index, int amount) {
-//                ArrayList<video> vids = VideoServices.getInstance().getVideo(user.getId());
-//                MultiButton[] cmps = new MultiButton[vids.size()];
-//                for (int i = 0; i < cmps.length; i++) {
-//
-//                    int videoWidth = (int) ((double) Display.getInstance().getDisplayWidth());
-//                    int videoHeight = (int) ((double) videoWidth * 0.5625);
-//                    String Title = vids.get(i).getTitle();
-//
-//                    BrowserComponent browser = new BrowserComponent();
-//
-//                    browser.setPreferredH(videoHeight);
-//                    browser.setPreferredW(videoWidth);
-//                    browser.setURL(vids.get(i).getUrl());
-//                    browser.getAllStyles().setPadding(0, 0, 0, 0);
-//                    browser.getAllStyles().setMargin(0, 0, 0, 0);
-//                    
-//                    cmps[i] = new MultiButton(Title);
-//                    cmps[i]
-//                    videos.add(Title);
-//                    videos.add(browser);
-//                }
-//                return cmps;
-//            }
-//        };
-//
-//        return videos2;
-//    }
 }
