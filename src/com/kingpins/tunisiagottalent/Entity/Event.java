@@ -16,8 +16,13 @@ public class Event {
 
     public int id;
     public String title;
-    public Date start_date;
-    public Date end_date;
+    java.util.Date dt = new java.util.Date();
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM-dd HH:mm:ss");
+    String start_date=sdf.format(dt);
+    String end_date=sdf.format(dt);
+    
+    //public Date start_date;
+    //public Date end_date;
     public String img;
     public String location;
     public int nb_places;
@@ -36,7 +41,7 @@ public class Event {
         this.type = type;
     }
 
-    public Event(String title, Date start_date, Date end_date, String img, String location, int nb_places, String description, String type) {
+    public Event(String title, String start_date, String end_date, String img, String location, int nb_places, String description, String type) {
         this.title = title;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -47,7 +52,7 @@ public class Event {
         this.type = type;
     }
 
-    public Event(int id, String title, Date start_date, Date end_date, String img, String location, int nb_places, String description, String type) {
+    public Event(int id, String title, String start_date, String end_date, String img, String location, int nb_places, String description, String type) {
         this.id = id;
         this.title = title;
         this.start_date = start_date;
@@ -67,11 +72,11 @@ public class Event {
         return title;
     }
 
-    public Date getStart_date() {
+    public String getStart_date() {
         return start_date;
     }
 
-    public Date getEnd_date() {
+    public String getEnd_date() {
         return end_date;
     }
 
@@ -103,11 +108,11 @@ public class Event {
         this.title = title;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(String start_date) {
         this.start_date = start_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(String end_date) {
         this.end_date = end_date;
     }
 
