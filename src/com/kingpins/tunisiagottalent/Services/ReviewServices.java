@@ -17,21 +17,25 @@ import com.kingpins.tunisiagottalent.Utils.Statics;
  * @author sarah
  */
 public class ReviewServices {
- public static ReviewServices instance;
- private final ConnectionRequest cnx;
-  public ReviewServices(){
- cnx = new ConnectionRequest();
- }
- public static ReviewServices getInstance() {
+
+    public static ReviewServices instance;
+    private final ConnectionRequest cnx;
+
+    public ReviewServices() {
+        cnx = new ConnectionRequest();
+    }
+
+    public static ReviewServices getInstance() {
         if (instance == null) {
             instance = new ReviewServices();
         }
         return instance;
     }
     boolean result;
- public boolean addReview(Review r) {
-        String url = Statics.BASE_URL + "/AjouterRJson?rating="+ r.getRating()
-                   +"&title="+r.getTitle()+"&category="+r.getCategory()+"&content="+r.getContent(); 
+
+    public boolean addReview(Review r) {
+        String url = Statics.BASE_URL + "/AjouterRJson?rating=" + r.getRating()
+                + "&title=" + r.getTitle() + "&category=" + r.getCategory() + "&content=" + r.getContent()+"&user_id="+r.getUser_id();;
         cnx.setUrl(url);
         cnx.setPost(false);
         cnx.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -43,6 +47,6 @@ public class ReviewServices {
         });
         NetworkManager.getInstance().addToQueueAndWait(cnx);
         return result;
-    } 
+    }
 
 }

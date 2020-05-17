@@ -84,7 +84,7 @@ ComplaintServices rs;
                         
                         Complaint c = new Complaint(tsubject.getSelectedItem().toString(),taContent.getText(),u);
                         if( ComplaintServices.getInstance().addComplaint(c))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                            Dialog.show("Success","Form added with success .It will be processed and we will reply as soon as possible.",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {
@@ -136,11 +136,7 @@ ComplaintServices rs;
             
                c3.addAll(a,b);
        addAll(c,c1,c2,c3); 
-       //Container espace2=new Container(BoxLayout.y());
-         //Label la2=new Label("   ");
-         //espace2.add(la2);
-         //add(espace2);
-         
+             
        Container co2=new Container(BoxLayout.x());
        Label contact2= new Label("Connect With Us:");
        co2.add(contact2);
@@ -232,9 +228,7 @@ ComplaintServices rs;
         c4.addAll(web,facebook,instagram,twitter,wordpress,linkedin);
         add(c4);
         Container space=new Container(BoxLayout.y());
-        //Label l=new Label("    ");
         Label ll=new Label("And if you want to share your...; ");
-        //Label lll=new Label("    ");
         
         Style s = UIManager.getInstance().getComponentStyle("Title");
         FontImage icon = FontImage.createMaterial(FontImage.MATERIAL_MIC, s);
