@@ -8,6 +8,7 @@ package com.kingpins.tunisiagottalent.GUI;
 import com.codename1.facebook.*;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.ShareButton;
 import com.codename1.components.Switch;
 import com.codename1.messaging.Message;
@@ -60,6 +61,7 @@ public class CompetitionParticipationsForm extends Form {
     CompetitionsServices cs = CompetitionsServices.getInstance();
     public CompetitionParticipationsForm(Resources res, Competition c, Form parentForm) throws IOException {
         super(BoxLayout.y());
+        
         this.getAllStyles().setBgColor(0x0c0527);
         getToolbar().addMaterialCommandToLeftBar(
                 "",
@@ -69,9 +71,10 @@ public class CompetitionParticipationsForm extends Form {
         Label subLabel = new Label(c.getSubject());
         subLabel.getAllStyles().setFgColor(0x990099);
         subLabel.getAllStyles().setAlignment(CENTER);
-        refreshTheme();
+        
         Label timerLabel = new Label();
         timerLabel.getAllStyles().setFgColor(0xF36B08);
+        compContainer.add(CENTER, timerLabel);
         Date t1 = new Date(System.currentTimeMillis());
         compContainer.add(BorderLayout.NORTH, subLabel);
         d = Math.abs(c.getCompetition_end_date().getTime() - t1.getTime());
@@ -84,10 +87,11 @@ public class CompetitionParticipationsForm extends Form {
                 m = ((d / 1000) % 3600) / 60;
                 s = (d / 1000) % 60;
                 timerLabel.setText(twoDigits(h) + ":" + twoDigits(m) + ":" + twoDigits(s));
+                refreshTheme();
             });
             uit.schedule(1000, true, this);
         }
-        compContainer.add(CENTER, timerLabel);
+        
         FloatingActionButton title = FloatingActionButton.createFAB(FontImage.MATERIAL_WHATSHOT);
         title.addActionListener(e -> {
             Dialog d = new Dialog("Ranking");
@@ -174,7 +178,7 @@ public class CompetitionParticipationsForm extends Form {
             browser.getAllStyles().setMarginRight(10);
             Container votingContainer = new Container(BorderLayout.center());
             Switch s1 = new Switch();
-            s1.getUnselectedStyle().setFgColor(0xff0000);
+            s1.getUnselectedStyle().setFgColor(0xF36B08);
             s1.getSelectedStyle().setBgColor(0x990099);
             Label Heart = new Label();
             Heart.getAllStyles().setFgColor(0x990099);
@@ -193,9 +197,10 @@ public class CompetitionParticipationsForm extends Form {
                 if (s1.isOff()) {
                     numVotes.setText(String.valueOf(Integer.valueOf(numVotes.getText()) - 1));
                     FontImage.setMaterialIcon(Heart, FontImage.MATERIAL_FAVORITE_OUTLINE, 4);
-                }
-                cs.unVote1(UserSession.instance.getU().getId(), p.getVideo_id().getId());
+                    cs.unVote1(UserSession.instance.getU().getId(), p.getVideo_id().getId());
                 return;
+                }
+                
             });
             if (p.getVideo_id().getNbVote().contains(UserSession.instance.getU().getId())) {
                 s1.setValue(true);
@@ -228,9 +233,17 @@ public class CompetitionParticipationsForm extends Form {
                 Display.getInstance().sendMessage(new String[]{p.getVideo_id().getOwner().getEmail()}, "I love Your Video", m1);
             });
             shareContainer.add(email);
+            
             videoContainer.add(browser);
             videoContainer.add(votingContainer);
             videoContainer.add(shareContainer);
+            Button Delete =new Button("Delete","LoginButton");
+            Delete.getAllStyles().setBgColor(0xF36B08);
+            Delete.addActionListener(e -> {
+             
+            });
+            if(UserSession.instance.getU().getId()==p.getVideo_id().getOwner().getId()){
+            videoContainer.add(BoxLayout.encloseXCenter(Delete));}
             videoTabs.addTab("", videoContainer);
         }
         videoTabs.getAllStyles().setPadding(20, 20, 20, 20);
@@ -260,6 +273,7 @@ public class CompetitionParticipationsForm extends Form {
             });
             add(radioContainer);
         }
+        
     }
 
 }

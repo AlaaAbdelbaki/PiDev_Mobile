@@ -6,6 +6,7 @@
 package com.kingpins.tunisiagottalent.GUI;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
@@ -44,6 +45,7 @@ public class ShopForm extends SideMenuBaseForm{
        // new HomeForm(theme).show();
        
        super(BoxLayout.y());
+      
  setUIID("CompForm");
  setupSideMenu(theme);
         current=this;
@@ -170,6 +172,6 @@ public class ShopForm extends SideMenuBaseForm{
             });
             
         }
-        
+         
     }
 }

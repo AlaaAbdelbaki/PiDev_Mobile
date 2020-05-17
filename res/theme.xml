@@ -47,6 +47,10 @@
         <gradient key="Dialog.bgGradient" color1="16711680" color2="255" posX="0.5" posY="0.5" radius="1.0" />
         <val key="Dialog.bgType" value="7" />
         <border key="Dialog.border" type="empty" />
+        <gradient key="Homepage.bgGradient" color1="1909323" color2="39423" posX="0.84" posY="0.5" radius="1.0" />
+        <val key="Homepage.bgType" value="7" />
+        <val key="Homepage.margin" value="0.0,0.0,0.0,0.0" />
+        <val key="Homepage.padding" value="0.0,0.0,0.0,0.0" />
         <val key="Label.fgColor" value="ffffff" />
         <font key="Label.font" type="ttf" face="0" style="1" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="3" actualSize="3.5" />
         <val key="Label.transparency" value="0" />
@@ -60,7 +64,7 @@
         <val key="LoginButton.padding" value="2.0,2.0,2.0,2.0" />
         <val key="LoginButton.press#align" value="4" />
         <val key="LoginButton.press#bgColor" value="cc66ff" />
-        <val key="LoginButton.press#fgColor" value="ff" />
+        <val key="LoginButton.press#fgColor" value="ffffff" />
         <font key="LoginButton.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.0" />
         <val key="LoginButton.press#marUnit" value="2,2,2,2" />
         <val key="LoginButton.press#margin" value="3.0,3.0,1.0,1.0" />

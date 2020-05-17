@@ -8,6 +8,7 @@ package com.kingpins.tunisiagottalent.GUI;
 import com.codename1.capture.Capture;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
@@ -76,12 +77,12 @@ public class ProfileForm extends SideMenuBaseForm {
 
     Label birthday = new Label("bday");
     SpanLabel bio = new SpanLabel("bio");
-    Button updateProfile = new Button("Update your profile","LoginButton");
+    Button updateProfile = new Button("Update your profile", "LoginButton");
 //    Button addVideo = new Button("Add video");
-    Button admin = new Button("Admin","LoginButton");
-    
-    Button talent = new Button("Talent","LoginButton");
-    Button regular = new Button("Simple User","LoginButton");
+    Button admin = new Button("Admin", "LoginButton");
+
+    Button talent = new Button("Talent", "LoginButton");
+    Button regular = new Button("Simple User", "LoginButton");
     Button subscribe = new Button("Subscribe");
     Picker sort = new Picker();
     Form current = this;
@@ -105,17 +106,20 @@ public class ProfileForm extends SideMenuBaseForm {
 //    Final form
     public ProfileForm(Resources res, User user) throws IOException {
         super(BoxLayout.y());
+        
         setUIID("ProfileForm");
+        setupSideMenu(res);
+        
         updateProfile.getAllStyles().setBgColor(0xF36B08);
 
-admin.getAllStyles().setBgColor(0xff0000);
-FontImage.setMaterialIcon(admin, FontImage.MATERIAL_BUILD, 3);
+        admin.getAllStyles().setBgColor(0xff0000);
+        FontImage.setMaterialIcon(admin, FontImage.MATERIAL_BUILD, 3);
 
-talent.getAllStyles().setBgColor(0x32CD32);
-FontImage.setMaterialIcon(talent, FontImage.MATERIAL_FAVORITE, 3);
+        talent.getAllStyles().setBgColor(0x32CD32);
+        FontImage.setMaterialIcon(talent, FontImage.MATERIAL_FAVORITE, 3);
 
-regular.getAllStyles().setBgColor(0xF36B08);
-FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
+        regular.getAllStyles().setBgColor(0xF36B08);
+        FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
 
         //labels init
         username.setText(user.getUsername());
@@ -144,7 +148,7 @@ FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
             }
         }
 
-       //Profile picture mask init
+        //Profile picture mask init
         String linkProfilePic = "http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic();
         enc = (EncodedImage) res.getImage("round-mask.png");
         Image roundMask = Image.createImage(enc.getWidth(), enc.getHeight(), 0xff000000);
@@ -174,7 +178,7 @@ FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
                     TextField urlInput = new TextField();
                     titleInput.getStyle().setFgColor(0);
                     urlInput.getStyle().setFgColor(0);
-                    Button submit = new Button("Submit","LoginButton");
+                    Button submit = new Button("Submit", "LoginButton");
                     BrowserComponent browser = new BrowserComponent();
                     int videoWidth = addVideo.getWidth();
                     browser.setPreferredH((videoWidth * 9) / 16);
@@ -241,7 +245,6 @@ FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
         userDetails.add(birthday);
         userDetails.add(bio);
         userDetailsButtons.add(updateProfile);
-//        userDetailsButtons.add(addVideo);
         userDetails.add(userDetailsButtons);
         profileFeedContainer.add(userDetails);
         profileFeedContainer.add(subscribtion);
@@ -265,13 +268,7 @@ FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
                 }
             }
         });
-//        Container properties
-//        profilePicContainer.setScrollableX(false);
-//        usernameContainer.setScrollableX(false);
-//        profileFeedContainer.setScrollableX(true);
 
-//        Adding containers to the form
-//        System.out.println(user.getRole());
         if (user.getRole().contains("ROLE_ADMIN")) {
             statusContainer.add(admin);
         } else if (user.getRole().contains("ROLE_TALENTED")) {
@@ -300,7 +297,6 @@ FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
                 alert.add(content);
                 alert.add(buttons);
                 Display display = Display.getInstance();
-//                alert.show((display.getDisplayHeight()/4)*2, (display.getDisplayHeight()/4)*3, 0, 0);
                 alert.show();
 
             }
@@ -341,7 +337,6 @@ FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
         subscribe.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-//                System.out.println(subscribe.getText());
                 int subCountValue;
                 subCountValue = us.getSubcount(user.getId()).get(1);
                 System.out.println("Subcount= " + subCountValue);
@@ -384,33 +379,26 @@ FontImage.setMaterialIcon(regular, FontImage.MATERIAL_ACCOUNT_CIRCLE, 3);
             @Override
             public void actionPerformed(ActionEvent evt) {
                 System.out.println(sort.getSelectedString());
-                
-                    //Needs to be fixed
-                
+
+                //Needs to be fixed
             }
         });
-        setupSideMenu(res);
+        
+
     }
 //
 
     Container loadVideos(User user) throws IOException {
-     //   setUIID("loadedVideos");
+        //   setUIID("loadedVideos");
         Container videos = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         Display display = Display.getInstance();
         int videoWidth = (int) ((double) display.getDisplayWidth());
         int videoHeight = (int) ((double) videoWidth * 0.5625);
-//        Tabs t = new Tabs();
-//        t.hideTabs();
-//        Style s = UIManager.getInstance().getComponentStyle("Button");
-//        FontImage radioEmptyImage = FontImage.createMaterial(FontImage.MATERIAL_RADIO_BUTTON_UNCHECKED, s);
-//        FontImage radioFullImage = FontImage.createMaterial(FontImage.MATERIAL_RADIO_BUTTON_CHECKED, s);
         ArrayList<video> vids = VideoServices.getInstance().getVideo(user.getId());
         System.out.println(vids.size());
-//        System.out.println(sort.getText());
         if (sort.getSelectedString().equals("Oldest videos")) {
 
             for (video v : VideoServices.getInstance().getVideo(user.getId())) {
-                //        for (int i = vids.size(); i <= 0; i--) {
 
                 Label Title = new Label(v.getTitle());
 

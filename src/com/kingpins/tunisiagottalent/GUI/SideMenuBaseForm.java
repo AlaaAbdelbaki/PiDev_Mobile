@@ -19,10 +19,13 @@
 package com.kingpins.tunisiagottalent.GUI;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.ToastBar;
 import com.codename1.io.Storage;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -65,12 +68,7 @@ public abstract class SideMenuBaseForm extends Form {
     }
 
     public void setupSideMenu(Resources res) throws IOException {
-         /*       Toolbar tb = getToolbar();
-        tb.setTitleCentered(false);
-        Button menuButton = new Button("");
-        menuButton.setUIID("Title");
-        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-        menuButton.addActionListener(e -> getToolbar().openSideMenu());*/
+        
         Image logo = res.getImage("logo.png");
       
         ImageViewer im =new ImageViewer(logo);
@@ -79,41 +77,47 @@ public abstract class SideMenuBaseForm extends Form {
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Home", FontImage.MATERIAL_HOME, e->{
-            try {
+            try {Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 new HomeForm(res).show();
+                ip.remove();
             } catch (IOException ex) {
             }
         });
          getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_PERSON, e -> {
-            try {
+            try {Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 new ProfileForm(res,UserSession.instance.getU()).show();
+                ip.remove();
             } catch (IOException ex) {
                
             }
         });
           getToolbar().addMaterialCommandToSideMenu("  Search", FontImage.MATERIAL_SEARCH,e->{
-            try {
+            try {Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 new SearchForm(res).show();
+                ip.remove();
             } catch (IOException ex) {
             }
         });
         getToolbar().addMaterialCommandToSideMenu("  Shop", FontImage.MATERIAL_SHOP,  e -> {
-            try {
+            try {Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 new ShopForm(res).show();
+                ip.remove();
             } catch (IOException ex) {
                
             }
         });
         getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT,e -> {
-            try {
-                new EventListForm(res).show();
+            try {Dialog ip = new InfiniteProgress().showInfiniteBlocking();
+                new EventListForm(res).show();              
+                ip.remove();
             } catch (IOException ex) {
                
             }
         });
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {
-            try {
+            try { Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 new CompetitionsForm(res).show();
+                 ip.remove();
             } catch (IOException ex) {
                
             }
@@ -121,8 +125,9 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST,null);
          getToolbar().addMaterialCommandToSideMenu("  Reviews", FontImage.MATERIAL_THUMB_UP, e -> {
                
-            try {
+            try {Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 new ReviewForm(res).show();
+                 ip.remove();
             } catch (IOException ex) {
                  }
                          
@@ -130,8 +135,9 @@ public abstract class SideMenuBaseForm extends Form {
         });
         getToolbar().addMaterialCommandToSideMenu("Contact us ", FontImage.MATERIAL_CONTACT_SUPPORT, e ->{
                
-            try {
+            try {Dialog ip = new InfiniteProgress().showInifiniteBlocking();
                 new ComplaintForm(res).show();
+                 ip.remove();
             } catch (IOException ex) {
                  }
                          

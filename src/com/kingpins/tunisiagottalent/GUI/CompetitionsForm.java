@@ -7,6 +7,7 @@ package com.kingpins.tunisiagottalent.GUI;
 
 import com.codename1.components.ImageViewer;
 import static com.codename1.components.ImageViewer.IMAGE_FILL;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.SpanLabel;
 import com.codename1.properties.UiBinding;
 import com.codename1.ui.Button;
@@ -62,6 +63,7 @@ public class CompetitionsForm extends SideMenuBaseForm {
     CompetitionsServices cs = CompetitionsServices.getInstance();
     public CompetitionsForm(Resources res) throws IOException {
         super( BoxLayout.y());
+        Dialog ip = new InfiniteProgress().showInifiniteBlocking();
         setScrollableY(false);
         Container everything=new Container(BoxLayout.y()){
             @Override
@@ -204,6 +206,7 @@ public class CompetitionsForm extends SideMenuBaseForm {
             refreshTheme();
         });
         uit.schedule(1000, true, this);
+         ip.dispose();
     }
     public static String twoDigits(long v) {
         return v < 10 ? "0" + v : "" + v;

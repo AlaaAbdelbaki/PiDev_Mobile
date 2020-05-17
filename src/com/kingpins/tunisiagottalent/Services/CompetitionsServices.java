@@ -33,6 +33,7 @@ import java.util.Map;
 public class CompetitionsServices {
 
     List<Competition> comps;
+    List<video> Videos;
     List<video> rank;
     List<competition_participant> participations;
     public static CompetitionsServices instance;
@@ -258,6 +259,14 @@ public class CompetitionsServices {
 
         v.setTitle(map.get("title").toString());
         v.setUrl((map.get("url")).toString());
+        Object m=map.get("votes");
+        List<Map<String,Double>> thisisnotok=(List<Map<String,Double>>) m;
+        List<Integer> f=new ArrayList();
+        
+        for (Map<String,Double> entry : thisisnotok) {
+            f.add((int)(double)entry.get("id"));
+        }
+        v.setVotes(f);
 
         return v;
     }
@@ -343,13 +352,71 @@ public class CompetitionsServices {
         NetworkManager.getInstance().addToQueueAndWait(con);
 
     }
+     public List<video> VideoList() {
+
+        String url = Statics.BASE_URL + "/Homepage/";
+        con.setUrl(url);
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    String str = new String(con.getResponseData());
+
+                    Videos = new ArrayList<>();
+                    JSONParser j = new JSONParser();
+
+                    Map<String, Object> VideosMap = j.parseJSON(new CharArrayReader(str.toCharArray()));
+
+                    List<Map<String, Object>> VideosList = (List<Map<String, Object>>) VideosMap.get("root");
+                    if (VideosList != null) {
+                        for (Map<String, Object> map : VideosList) {
+
+                            Videos.add(parseRanks(map));
+                        }
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                con.removeResponseListener(this);
+            }
+        });
+
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return Videos;
+    }
+     
+      public List<video> HomepageRanks() {
+
+        String url = Statics.BASE_URL + "/Homepage/ranks";
+        con.setUrl(url);
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    String str = new String(con.getResponseData());
+                    rank = new ArrayList<>();
+                    JSONParser j = new JSONParser();
+
+                    Map<String, Object> ranksMap = j.parseJSON(new CharArrayReader(str.toCharArray()));
+
+                    List<Map<String, Object>> ranksList = (List<Map<String, Object>>) ranksMap.get("root");
+                    if (ranksList != null) {
+                        for (Map<String, Object> map : ranksList) {
+                            rank.add(parseRanks(map));
+                        }
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                con.removeResponseListener(this);
+            }
+
+        });
+
+        NetworkManager.getInstance().addToQueueAndWait(con);
+
+        return rank;
+    }
 }
 
-/*ConnectionRequest req = new ConnectionRequest() {
-            protected void buildRequestBody(OutputStream os) throws IOException {
-                os.write(json.getBytes("UTF-8"));
-            }
-        };
-req.setHttpMethod("POST");               
-req.setContentType("application/json");
-req.setReadResponseForErrors(true);*/
+
