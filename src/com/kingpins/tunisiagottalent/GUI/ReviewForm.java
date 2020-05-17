@@ -44,18 +44,13 @@ public class ReviewForm extends SideMenuBaseForm {
 
     ReviewForm(Resources res) throws IOException {
         super(BoxLayout.y());
-        Toolbar tb = getToolbar();
-        tb.setTitleCentered(false);
-        Button menuButton = new Button("");
-        menuButton.setUIID("Title");
-        FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
-        menuButton.addActionListener(e -> getToolbar().openSideMenu());
+         setUIID("CompForm");
         setupSideMenu(res);
-        setLayout(BoxLayout.y());
+        
         User u = UserSession.instance.getU();
         Label lc = new Label("Category");
         ComboBox category = new ComboBox();
-        category.addItem("Events ");
+        category.addItem("Events");
         category.addItem("Orders");
         category.addItem("Competitions");
         category.addItem("Articles");
@@ -90,9 +85,9 @@ public class ReviewForm extends SideMenuBaseForm {
                 } else {
                     try {
                         Review r = new Review(u, category.getSelectedItem().toString(), rating.getProgress(), taContent.getText(), tftitle.getText());
-                        ReviewServices.getInstance().addReview(r);
+                        
                         if (ReviewServices.getInstance().addReview(r)) {
-                            Dialog.show("Success", "Form added with success", new Command("OK"));
+                            Dialog.show("Success", "Review Sent with success", new Command("OK"));
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }
@@ -110,9 +105,7 @@ public class ReviewForm extends SideMenuBaseForm {
         add(btnValider);
     }
 
-    @Override
-    protected void showOtherForm(Resources res) {
-    }
+    
 
     private void initStarRankStyle(Style s, Image star) {
         s.setBackgroundType(Style.BACKGROUND_IMAGE_TILE_BOTH);

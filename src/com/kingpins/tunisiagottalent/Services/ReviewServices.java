@@ -35,7 +35,7 @@ public class ReviewServices {
 
     public boolean addReview(Review r) {
         String url = Statics.BASE_URL + "/AjouterRJson?rating=" + r.getRating()
-                + "&title=" + r.getTitle() + "&category=" + r.getCategory() + "&content=" + r.getContent()+"&user_id="+r.getUser_id();;
+                + "&title=" + r.getTitle() + "&category=" + r.getCategory() + "&content=" + r.getContent()+"&user_id="+r.getUser_id().getId();
         cnx.setUrl(url);
         cnx.setPost(false);
         cnx.addResponseListener(new ActionListener<NetworkEvent>() {
