@@ -104,7 +104,13 @@ public abstract class SideMenuBaseForm extends Form {
                
             }
         });
-        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT,null);
+        getToolbar().addMaterialCommandToSideMenu("  Events", FontImage.MATERIAL_EVENT,e -> {
+            try {
+                new EventListForm(res).show();
+            } catch (IOException ex) {
+               
+            }
+        });
         getToolbar().addMaterialCommandToSideMenu("  Competitions", FontImage.MATERIAL_TRENDING_UP, e -> {
             try {
                 new CompetitionsForm(res).show();

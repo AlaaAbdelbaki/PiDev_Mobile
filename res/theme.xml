@@ -67,15 +67,6 @@
         <val key="LoginButton.press#padUnit" value="2,2,2,2" />
         <val key="LoginButton.press#padding" value="2.0,2.0,2.0,2.0" />
         <val key="LoginButton.press#transparency" value="255" />
-        <val key="LoginButton.sel#align" value="4" />
-        <val key="LoginButton.sel#bgColor" value="cc66ff" />
-        <val key="LoginButton.sel#fgColor" value="ff33" />
-        <font key="LoginButton.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
-        <val key="LoginButton.sel#marUnit" value="2,2,2,2" />
-        <val key="LoginButton.sel#margin" value="3.0,3.0,1.0,1.0" />
-        <val key="LoginButton.sel#padUnit" value="2,2,2,2" />
-        <val key="LoginButton.sel#padding" value="2.0,2.0,2.0,2.0" />
-        <val key="LoginButton.sel#transparency" value="255" />
         <val key="LoginButton.transparency" value="255" />
         <gradient key="PopupDialog.bgGradient" color1="10027161" color2="153" posX="0.5" posY="0.58" radius="1.1" />
         <val key="PopupDialog.bgType" value="7" />
