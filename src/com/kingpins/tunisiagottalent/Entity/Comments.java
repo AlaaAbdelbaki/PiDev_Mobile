@@ -16,7 +16,14 @@ public class Comments {
     private int id;
     private User author;
     private String body;
-
+    
+    public Comments(){
+        
+    }
+    
+    public Comments(String body){
+        this.body=body;
+    }
     public Comments(int id, User author, String body, Date created_at) {
         this.id = id;
         this.author = author;
@@ -58,6 +65,5 @@ public class Comments {
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
-
     
 }

@@ -11,6 +11,7 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
+import com.kingpins.tunisiagottalent.Entity.Comments;
 import com.kingpins.tunisiagottalent.Utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.Map;
  */
 public class ArticleService {
     public ArrayList<Article> articles;
+    public ArrayList<Comments> comments;
     public boolean resultOK;
     private ConnectionRequest req;
     public static ArticleService instance;
@@ -81,8 +83,55 @@ public class ArticleService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         System.out.println(articles);
         return articles;
+ }  
+ 
+ 
+ 
+    public ArrayList<Comments> parseComments(String jsonText){
+       try {
+            comments = new ArrayList<>();
+            JSONParser j = new JSONParser();
+            Map<String, Object> commentListJSON;
+        
+        
+            commentListJSON = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+       
+            List<Map<String, Object>> list = (List<Map<String, Object>>) commentListJSON.get("root");
+            for(Map<String,Object> obj : list){
+                
+                Comments c = new Comments();
+                
+                c.setBody(obj.get("content").toString());
+                comments.add(c);
+            }
+       
+        
+             }
+       catch (IOException ex) {
+            
+        }
+       
+        
+   
+       return comments;
+     }
+     
+     
+     public ArrayList<Comments> getAllComments(int id){
+        String url = Statics.BASE_URL+"/comments/show?articleid="+id;
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                comments = parseComments(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        System.out.println(comments);
+        return comments;
  }
-    }
+}
 
-
-
+ 

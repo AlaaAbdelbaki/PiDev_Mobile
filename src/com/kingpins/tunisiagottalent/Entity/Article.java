@@ -7,7 +7,7 @@ package com.kingpins.tunisiagottalent.Entity;
 
 /**
  *
- * @author ghassen
+ * @author 
  */
 
 public class Article {
