@@ -5,18 +5,13 @@
  */
 package com.kingpins.tunisiagottalent.GUI;
 
-import com.codename1.capture.Capture;
+
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
-import com.codename1.components.InfiniteProgress;
-import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
-import com.codename1.components.ToastBar;
-
 import com.codename1.ui.BrowserComponent;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
@@ -24,31 +19,21 @@ import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
-
 import com.codename1.ui.Image;
-import com.codename1.ui.InfiniteContainer;
 import com.codename1.ui.Label;
-import com.codename1.ui.Tabs;
-import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.events.DataChangedListener;
-import com.codename1.ui.events.FocusListener;
-import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.plaf.Style;
-import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
 import com.kingpins.tunisiagottalent.Entity.User;
 import com.kingpins.tunisiagottalent.Entity.video;
 import com.kingpins.tunisiagottalent.Services.UserServices;
 import com.kingpins.tunisiagottalent.Services.VideoServices;
-
 import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
 
@@ -395,7 +380,7 @@ public class ProfileForm extends SideMenuBaseForm {
         int videoWidth = (int) ((double) display.getDisplayWidth());
         int videoHeight = (int) ((double) videoWidth * 0.5625);
         ArrayList<video> vids = VideoServices.getInstance().getVideo(user.getId());
-        System.out.println(vids.size());
+     
         if (sort.getSelectedString().equals("Oldest videos")) {
 
             for (video v : VideoServices.getInstance().getVideo(user.getId())) {
@@ -411,6 +396,35 @@ public class ProfileForm extends SideMenuBaseForm {
                 browser.getAllStyles().setMargin(0, 0, 0, 0);
                 videos.add(Title);
                 videos.add(browser);
+                Button DeleteButton=new Button("Delete","LoginButton");
+                DeleteButton.getAllStyles().setBgColor(0xF36B08);
+               DeleteButton.addActionListener(e -> {
+               Dialog alert = new Dialog("Warning");
+                SpanLabel message = new SpanLabel("Are you sure you want to delete your Video?\nThis action once done cannot be reverted!");
+                alert.add(message);
+                Button ok = new Button("Proceed");
+                Button cancel = new Button(new Command("Cancel"));
+                //User clicks on ok to delete account
+                ok.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        us.DeleteVideo(v);
+                        browser.remove();
+                         DeleteButton.remove();
+                         Title.remove();
+                        alert.dispose();
+                        refreshTheme();
+                    }
+                });
+
+                alert.add(cancel);
+                alert.add(ok);
+                alert.showDialog();
+                
+                
+             
+            });
+                videos.add(BoxLayout.encloseXCenter(DeleteButton));
             }
         } else {
             for (int i = vids.size(); i <= 0; i--) {

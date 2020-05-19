@@ -301,9 +301,6 @@ public class UserServices {
         try {
             JSONParser j = new JSONParser();
             Map<String, Object> obj = j.parseJSON(new CharArrayReader(json.toCharArray()));
-//            System.out.println("start");
-//            System.out.println(obj.get("subscriberscount"));
-//            System.out.println("end");
             subbedTo = Integer.parseInt(((Map<String, Object>) obj.get("subscribedToCount")).get("1").toString());
             sub = Integer.parseInt(((Map<String, Object>) obj.get("subscriberscount")).get("1").toString());
             list.add(subbedTo);
@@ -327,11 +324,7 @@ public class UserServices {
                 int subscribers;
 
                 subscribedTo = parseSubCount(new String(con.getResponseData())).get(0);
-                subscribers = parseSubCount(new String(con.getResponseData())).get(1);
-//                System.out.println("subscribedTo");
-//                System.out.println(subscribedTo);
-//                System.out.println("subscribers");
-//                System.out.println(subscribers);
+                subscribers = parseSubCount(new String(con.getResponseData())).get(1);               
                 con.removeResponseListener(this);
 
                 list.add(subscribedTo);
@@ -436,4 +429,22 @@ public class UserServices {
 
         return users;
     }
+    
+      public void DeleteVideo(video p){
+       String url = Statics.BASE_URL + "/Video/Delete/?video=" + p.getId();
+
+        con.setUrl(url);
+
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+               
+                con.removeResponseListener(this);
+            }
+
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+      
+      
+      }
 }

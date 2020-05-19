@@ -19,10 +19,8 @@ import com.kingpins.tunisiagottalent.Entity.competition_participant;
 import com.kingpins.tunisiagottalent.Entity.video;
 import com.kingpins.tunisiagottalent.Utils.Statics;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -417,6 +415,23 @@ public class CompetitionsServices {
 
         return rank;
     }
+      public void DeleteParticipation(competition_participant p){
+       String url = Statics.BASE_URL + "/Participation/Delete/?participation=" + p.getId();
+
+        con.setUrl(url);
+
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+               
+                con.removeResponseListener(this);
+            }
+
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+      
+      
+      }
 }
 
 

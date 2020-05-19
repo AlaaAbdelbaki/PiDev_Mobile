@@ -9,7 +9,6 @@ import com.codename1.components.ImageViewer;
 import static com.codename1.components.ImageViewer.IMAGE_FILL;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.SpanLabel;
-import com.codename1.properties.UiBinding;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
@@ -17,37 +16,24 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.ui.List;
-import com.codename1.ui.SwipeableContainer;
 import com.codename1.ui.Tabs;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.geom.Dimension;
-import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.FlowLayout;
-
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
-
-import com.codename1.ui.table.TableLayout;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.util.UITimer;
 import com.codename1.util.DateUtil;
-
 import com.kingpins.tunisiagottalent.Entity.Competition;
 import com.kingpins.tunisiagottalent.Entity.video;
 import com.kingpins.tunisiagottalent.Services.CompetitionsServices;
 import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
-
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

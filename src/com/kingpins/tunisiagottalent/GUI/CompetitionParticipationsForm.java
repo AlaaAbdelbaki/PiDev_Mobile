@@ -10,11 +10,13 @@ import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.ShareButton;
+import com.codename1.components.SpanLabel;
 import com.codename1.components.Switch;
 import com.codename1.messaging.Message;
 import com.codename1.ui.BrowserComponent;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
@@ -31,6 +33,8 @@ import com.codename1.ui.RadioButton;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -240,6 +244,27 @@ public class CompetitionParticipationsForm extends Form {
             Button Delete =new Button("Delete","LoginButton");
             Delete.getAllStyles().setBgColor(0xF36B08);
             Delete.addActionListener(e -> {
+               Dialog alert = new Dialog("Warning");
+                SpanLabel message = new SpanLabel("Are you sure you want to delete your Video?\nThis action once done cannot be reverted!");
+                alert.add(message);
+                Button ok = new Button("Proceed");
+                Button cancel = new Button(new Command("Cancel"));
+                //User clicks on ok to delete account
+                ok.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        cs.DeleteParticipation(p);
+                        videoContainer.remove();
+                        alert.dispose();
+                        refreshTheme();
+                    }
+                });
+
+                alert.add(cancel);
+                alert.add(ok);
+                alert.showDialog();
+                
+                
              
             });
             if(UserSession.instance.getU().getId()==p.getVideo_id().getOwner().getId()){

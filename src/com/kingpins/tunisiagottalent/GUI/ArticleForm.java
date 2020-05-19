@@ -70,6 +70,7 @@ public class ArticleForm extends SideMenuBaseForm{
    public ArticleForm(Resources theme) throws IOException{
        //new HomeForm(theme).show();
        super(BoxLayout.y());
+        setUIID("CompForm");
        setupSideMenu(theme);
         //current=this;
         ArrayList<Article> articles = ArticleService.getInstance().getAllArticles();
@@ -104,7 +105,7 @@ public class ArticleForm extends SideMenuBaseForm{
             EncodedImage enc;
             Image imgs;
             ImageViewer imgv;
-           String url = "http://127.0.0.1:8000/assets/img/blog-img/"+a.getImg();
+           String url = "http://127.0.0.1:8000/assets/img/shop-img/"+a.getImg();
             enc = EncodedImage.create("/logo1.png");
             imgs = URLImage.createToStorage(enc, url, url);
             imgs.scaled(1500, 1200);
@@ -112,18 +113,18 @@ public class ArticleForm extends SideMenuBaseForm{
             add(imgv);
              
               // add(cnt1);
-            Label contentLabel = new Label(a.getContent());
+           // Label contentLabel = new Label(a.getContent());
             
               
             Button readMore = new Button("Read More");
             
-            add(contentLabel);
+          //  add(contentLabel);
             add(readMore);
             
             
             readMore.addActionListener(event -> {
                 try {
-                    new ViewArticleForm(a).show();
+                    new ViewArticleForm(a,this).show();
                 } catch (IOException ex) {
            
                 }});

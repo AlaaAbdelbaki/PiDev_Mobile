@@ -39,10 +39,11 @@ import com.codename1.ui.util.Resources;
  */
 public class ViewArticleForm extends Form {
     
-    public ViewArticleForm(Article a) throws IOException{
+    public ViewArticleForm(Article a , Form previous) throws IOException{
          super(BoxLayout.y());
        //setupSideMenu(theme);
-     
+      setUIID("CompForm");
+      getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
            Container cnt1 = new Container(new LayeredLayout());
             LayeredLayout ll2 = (LayeredLayout)cnt1.getLayout();
         EncodedImage enc;

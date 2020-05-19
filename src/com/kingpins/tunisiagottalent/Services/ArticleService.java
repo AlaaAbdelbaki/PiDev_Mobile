@@ -55,7 +55,7 @@ public class ArticleService {
                   a.setTitle(obj.get("title").toString());
                   a.setContent(obj.get("content").toString());
                   a.setImg(obj.get("img").toString());
-             System.out.println(a);
+            
              articles.add(a);
             }
        

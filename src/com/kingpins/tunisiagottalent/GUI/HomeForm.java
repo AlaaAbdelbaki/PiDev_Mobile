@@ -6,10 +6,13 @@
 package com.kingpins.tunisiagottalent.GUI;
 
 
+import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.Switch;
 import com.codename1.ui.BrowserComponent;
+import com.codename1.ui.Button;
+import static com.codename1.ui.Component.BOTTOM;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -20,28 +23,35 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextField;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.events.DataChangedListener;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.util.Resources;
 import com.kingpins.tunisiagottalent.Entity.video;
 import com.kingpins.tunisiagottalent.Services.CompetitionsServices;
+import com.kingpins.tunisiagottalent.Services.UserServices;
 import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
+
 
 /**
  *
  * @author Anis
  */
 public class HomeForm extends SideMenuBaseForm {
-
+ FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
     CompetitionsServices cs = CompetitionsServices.getInstance();
-
+ UserServices us = new UserServices();
     public HomeForm(Resources res) throws IOException {
         super(BoxLayout.y());
-         Dialog ip = new InfiniteProgress().showInifiniteBlocking();
+         Dialog ip = new InfiniteProgress().showInfiniteBlocking();
         setUIID("Homepage");
         setupSideMenu(res);
       
@@ -148,7 +158,73 @@ public class HomeForm extends SideMenuBaseForm {
             videoContainer.getAllStyles().setBorder(Border.createRoundBorder(50, 50, 0xffffff));
             add(videoContainer);
         }
-ip.dispose();
+if (UserSession.instance.getU().getRole().contains("ROLE_TALENTED") ) {
+
+            fab.setTextPosition(BOTTOM);
+            fab.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    Dialog addVideo = new Dialog("Add video");
+                    addVideo.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+                    Container title = new Container(new FlowLayout(CENTER, CENTER));
+                    Container url = new Container(new FlowLayout(CENTER, CENTER));
+                    Container preview = new Container(new FlowLayout(CENTER, CENTER));
+                    TextField titleInput = new TextField();
+                    TextField urlInput = new TextField();
+                    titleInput.getStyle().setFgColor(0);
+                    urlInput.getStyle().setFgColor(0);
+                    Button submit = new Button("Submit", "LoginButton");
+                    BrowserComponent browser = new BrowserComponent();
+                    int videoWidth = addVideo.getWidth();
+                    browser.setPreferredH((videoWidth * 9) / 16);
+                    browser.setPreferredW(videoWidth);
+
+                    urlInput.addDataChangedListener(new DataChangedListener() {
+                        @Override
+                        public void dataChanged(int type, int index) {
+                            String code = urlInput.getText().substring(urlInput.getText().length() - 11);
+                            String link = "https://www.youtube.com/embed/" + code;
+                            System.out.println(link);
+                            browser.setURL(link);
+                            browser.getAllStyles().setPadding(0, 0, 0, 0);
+                            browser.getAllStyles().setMargin(0, 0, 0, 0);
+                        }
+                    });
+                    submit.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent evt) {
+                            video v = new video();
+                            v.setTitle(titleInput.getText());
+                            v.setUrl("https://www.youtube.com/embed/" + urlInput.getText().substring(urlInput.getText().length() - 11));
+                            v.setOwner(UserSession.instance.getU());
+                            if (us.addVideo(v)) {
+                                addVideo.dispose();
+                                try {
+                                    new HomeForm(res).showBack();
+                                } catch (IOException ex) {
+                                
+                                }
+                            }
+                        }
+                    });
+                    title.add(titleInput);
+                    url.add(urlInput);
+                    preview.add(browser);
+                    addVideo.add(new Label("Title"));
+                    addVideo.add(title);
+                    addVideo.add(new Label("Video Link"));
+                    addVideo.add(url);
+                    addVideo.add(new Label("Preview"));
+                    addVideo.add(preview);
+                    addVideo.add(submit);
+
+                    addVideo.showPopupDialog(fab);
+
+                }
+            });
+            fab.bindFabToContainer(this.getContentPane());
+        }
+ip.remove();
     }
     public void updateRanks(Container c,Resources res){
         c.removeAll();

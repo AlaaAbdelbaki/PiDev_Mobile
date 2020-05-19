@@ -56,7 +56,7 @@ public class VideoServices {
             for(Map<String,Object> obj : list){
                 video v = new video();
           
-//                v.setId((int)Float.parseFloat(obj.get("id").toString()));
+                v.setId((int)Float.parseFloat(obj.get("id").toString()));
                 v.setUrl(obj.get("url").toString());
                 v.setTitle(obj.get("title").toString());
 //                v.setPublish_date(new Date((((Double) ((Map<String, Object>) obj.get("publish_date")).get("timestamp")).longValue() * 1000)));

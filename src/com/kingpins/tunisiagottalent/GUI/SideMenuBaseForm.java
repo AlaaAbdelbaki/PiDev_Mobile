@@ -20,26 +20,17 @@ package com.kingpins.tunisiagottalent.GUI;
 
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InfiniteProgress;
-import com.codename1.components.ToastBar;
-import com.codename1.io.Storage;
-import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
-import com.codename1.ui.Display;
-import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
-import com.codename1.ui.Label;
-import com.codename1.ui.Toolbar;
-import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
 import com.kingpins.tunisiagottalent.Utils.UserSession;
 import java.io.IOException;
-import java.io.InputStream;
+
 
 
 
@@ -122,7 +113,12 @@ public abstract class SideMenuBaseForm extends Form {
                
             }
         });
-        getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST,null);
+        getToolbar().addMaterialCommandToSideMenu("  News", FontImage.MATERIAL_LIST,(e->{
+        try {
+                new ArticleForm(res).show();
+            } catch (IOException ex) {
+               
+            }}));
          getToolbar().addMaterialCommandToSideMenu("  Reviews", FontImage.MATERIAL_THUMB_UP, e -> {
                
             try {Dialog ip = new InfiniteProgress().showInfiniteBlocking();
